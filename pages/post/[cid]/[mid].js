@@ -56,7 +56,7 @@ export default function Post({params, posts}) {
 
 export async function getStaticPaths() {
   
-  const paths =[]
+  const paths =[ {params: { cid: '1266', mid: '21360' }}]
 
   return { paths, fallback: true }
 }
