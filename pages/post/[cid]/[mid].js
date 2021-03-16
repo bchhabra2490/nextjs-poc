@@ -8,7 +8,6 @@ import Head from 'next/head'
 export default function Post({params, posts}) {
     const router = useRouter()
     const {cid, mid} = router.query
-    console.log(cid, mid, posts);
 
     const content = JSON.parse(posts[0].content);
     return <div>
@@ -57,15 +56,14 @@ export default function Post({params, posts}) {
 
 export async function getStaticPaths() {
   
-  const paths =[ {params: { cid: '1266', mid: '21360' }}, {params: { cid: '126', mid: '2130' }}]
+  const paths =[]
 
-  return { paths, fallback: false }
+  return { paths, fallback: true }
 }
 
 
   export async function getStaticProps({ params }) {
     // Fetch necessary data for the blog post using params.id
-    console.log(params);
     const query = gql`
   query getMessages ($getMessageData: GetMessageData!) {
     getMessages (messages: [$getMessageData]) {
