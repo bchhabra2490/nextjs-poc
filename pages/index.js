@@ -1,7 +1,12 @@
 import Head from 'next/head'
 import styles from '../styles/Home.module.css'
+import { ApolloClient, InMemoryCache, gql, createHttpLink } from '@apollo/client';
+import { setContext } from '@apollo/client/link/context';
+import Link from 'next/link'
 
-export default function Home() {
+
+export default function Home({posts}) {
+  console.log(posts);
   return (
     <div className={styles.container}>
       <Head>
@@ -20,33 +25,15 @@ export default function Home() {
         </p>
 
         <div className={styles.grid}>
-          <a href="https://nextjs.org/docs" className={styles.card}>
-            <h3>Documentation &rarr;</h3>
-            <p>Find in-depth information about Next.js features and API.</p>
-          </a>
+          {posts.map(post=>{
+            return( <Link href={`/post/${post.communityID}/${post.ID}`}><a className={styles.card}>
+            <h3>{JSON.parse(post.content).title}</h3>
+            <p>{JSON.parse(post.content).shortDesc}</p>
+          </a></Link>)
+          })}
+         
 
-          <a href="https://nextjs.org/learn" className={styles.card}>
-            <h3>Learn &rarr;</h3>
-            <p>Learn about Next.js in an interactive course with quizzes!</p>
-          </a>
-
-          <a
-            href="https://github.com/vercel/next.js/tree/master/examples"
-            className={styles.card}
-          >
-            <h3>Examples &rarr;</h3>
-            <p>Discover and deploy boilerplate example Next.js projects.</p>
-          </a>
-
-          <a
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-          >
-            <h3>Deploy &rarr;</h3>
-            <p>
-              Instantly deploy your Next.js site to a public URL with Vercel.
-            </p>
-          </a>
+          
         </div>
       </main>
 
@@ -62,4 +49,50 @@ export default function Home() {
       </footer>
     </div>
   )
+}
+
+export async function getStaticProps() {
+  // Code will go here
+
+  const httpLink = createHttpLink({
+    uri: 'https://dev-graphql.tejimandi.com/graphql',
+  });
+  
+  const authLink = setContext((_, { headers }) => {
+    return {
+      headers: {
+        ...headers,
+        'api-version': 2,
+      }
+    }
+  });
+  
+  const client = new ApolloClient({
+    link: authLink.concat(httpLink),
+    cache: new InMemoryCache()
+  });
+
+  const { data } = await client.query({
+    
+    query:gql`
+  query getBlogPosts {
+    getBlogPosts {
+      ID
+      messageType
+      content
+      communityID
+      createdOn
+      community {
+        title
+      }
+      __typename
+    }
+  }
+`
+  });
+  return {
+    props: {
+      posts: data.getBlogPosts
+    }
+  }
 }
