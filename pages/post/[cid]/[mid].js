@@ -19,7 +19,7 @@ export default function Post({params, posts}) {
         <meta
           data-react-helmet="true"
           name="og:title"
-          content="Teji Mandi - Stock Investing, Simplified"
+          content={content.title}
         />
         <meta data-react-helmet="true" name="og:description" content={content.shortDesc} />
         <meta data-react-helmet="true" name="og:type" content="article" />
