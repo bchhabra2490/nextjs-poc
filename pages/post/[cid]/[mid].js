@@ -5,9 +5,7 @@ import Head from 'next/head'
 
 
 
-export default function Post({params, posts}) {
-    const router = useRouter()
-    const {cid, mid} = router.query
+export default function Post({posts}) {
 
     const content = JSON.parse(posts[0].content);
     return <div>
