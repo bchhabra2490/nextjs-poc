@@ -1,98 +1,25 @@
-import Head from 'next/head'
-import styles from '../styles/Home.module.css'
-import { ApolloClient, InMemoryCache, gql, createHttpLink } from '@apollo/client';
-import { setContext } from '@apollo/client/link/context';
-import Link from 'next/link'
+import React from 'react';
+import PropTypes from 'prop-types';
+import { ThemeProvider } from '@material-ui/core/styles';
 
+// import useStyles from './styles';
+import Layout from '../components/layout';
+import SEO from '../components/seo';
+import defaultTheme from '../theme-material-ui/theme';
+import IndexPageTemplate from '../components/index-page-template';
 
-export default function Home({posts}) {
-  console.log(posts);
-  return (
-    <div className={styles.container}>
-      <Head>
-        <title>Create Next App</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
+const IndexPage = ({ location }) => (
 
-      <main className={styles.main}>
-        <h1 className={styles.title}>
-          Welcome to <a href="https://nextjs.org">Next.js!</a>
-        </h1>
+  <Layout location={location} showLinks>
+    <SEO title="Teji Mandi - Stock Investing, Simplified" />
+    <ThemeProvider theme={defaultTheme}>
+      <IndexPageTemplate showForm={false} />
+    </ThemeProvider>
+  </Layout>
+);
 
-        <p className={styles.description}>
-          Get started by editing{' '}
-          <code className={styles.code}>pages/index.js</code>
-        </p>
+IndexPage.propTypes = {
+  location: PropTypes.instanceOf(Object).isRequired,
+};
 
-        <div className={styles.grid}>
-          {posts.map(post=>{
-            return( <Link href={`/post/${post.communityID}/${post.ID}`}><a className={styles.card}>
-            <h3>{JSON.parse(post.content).title}</h3>
-            <p>{JSON.parse(post.content).shortDesc}</p>
-          </a></Link>)
-          })}
-         
-
-          
-        </div>
-      </main>
-
-      <footer className={styles.footer}>
-        <a
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by{' '}
-          <img src="/vercel.svg" alt="Vercel Logo" className={styles.logo} />
-        </a>
-      </footer>
-    </div>
-  )
-}
-
-export async function getStaticProps() {
-  // Code will go here
-
-  const httpLink = createHttpLink({
-    uri: 'https://dev-graphql.tejimandi.com/graphql',
-  });
-  
-  const authLink = setContext((_, { headers }) => {
-    return {
-      headers: {
-        ...headers,
-        'api-version': 2,
-      }
-    }
-  });
-  
-  const client = new ApolloClient({
-    link: authLink.concat(httpLink),
-    cache: new InMemoryCache()
-  });
-
-  const { data } = await client.query({
-    
-    query:gql`
-  query getBlogPosts {
-    getBlogPosts {
-      ID
-      messageType
-      content
-      communityID
-      createdOn
-      community {
-        title
-      }
-      __typename
-    }
-  }
-`
-  });
-  return {
-    props: {
-      posts: data.getBlogPosts
-    }
-  }
-}
+export default IndexPage;

@@ -1,4 +1,3 @@
-import { useRouter } from 'next/router'
 import { ApolloClient, InMemoryCache, gql, createHttpLink } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
 import Head from 'next/head'
@@ -52,15 +51,9 @@ export default function Post({posts}) {
   }
   
 
-export async function getStaticPaths() {
-  
-  const paths =[ {params: { cid: '1266', mid: '21360' }}]
-
-  return { paths, fallback: true }
-}
 
 
-  export async function getStaticProps({ params }) {
+  export async function getServerSideProps({ params }) {
     // Fetch necessary data for the blog post using params.id
     const query = gql`
   query getMessages ($getMessageData: GetMessageData!) {
