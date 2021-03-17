@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import {
   Grid, Typography, Select, MenuItem, ButtonGroup, Button, Hidden,
 } from '@material-ui/core';
+import Image from 'next/image';
 import { createApolloFetch } from 'apollo-fetch';
 import moment from 'moment';
 import { makeStyles } from '@material-ui/core/styles';
@@ -110,7 +111,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const ChartSection = ({
-  getAppLink, appStoreImg, playstoreImg, paretClasses, showAppDownloads,
+  getAppLink, paretClasses, showAppDownloads,
 }) => {
   const classes = useStyles();
   const [data, setData] = useState(null);
@@ -411,7 +412,7 @@ const ChartSection = ({
               target="_blank"
               rel="noreferrer"
             >
-              <img src={playstoreImg.childImageSharp.fluid.src} alt="Google Play" className={paretClasses.appStoreImage} />
+              <Image src="/img/playstore.png" height={50} width="auto" alt="Google Play" className={paretClasses.appStoreImage} />
             </a>
           </div>
           <div>
@@ -420,7 +421,7 @@ const ChartSection = ({
               href="https://apps.apple.com/in/app/teji-mandi-portfolio-advisor/id1531900507"
               target="_blank"
             >
-              <img src={appStoreImg.childImageSharp.fluid.src} alt="Apple Store" className={paretClasses.appStoreImage} />
+              <Image src="/img/app_store.png" height={50} width="auto" alt="Apple Store" className={paretClasses.appStoreImage} />
             </a>
 
           </div>
@@ -435,9 +436,6 @@ const ChartSection = ({
 ChartSection.propTypes = {
   paretClasses: PropTypes.instanceOf(Object).isRequired,
   getAppLink: PropTypes.instanceOf(Object).isRequired,
-  appStoreImg: PropTypes.instanceOf(Object).isRequired,
-  playstoreImg: PropTypes.instanceOf(Object).isRequired,
-
 };
 
 export default ChartSection;

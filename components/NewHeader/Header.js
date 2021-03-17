@@ -1,8 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Link from 'next/link';
-import { useStaticQuery, graphql } from 'gatsby';
-import scrollTo from 'gatsby-plugin-smoothscroll';
+import Image from 'next/image'
 import {
   Hidden,
 } from '@material-ui/core';
@@ -44,30 +43,6 @@ function getOS() {
 const Header = ({
   handleSidebar, showLinks, showMenu, headerLink,
 }) => {
-  const data = useStaticQuery(graphql`
-    query {
-      logoImage: file(relativePath: { eq: "logo.png" }) {
-        childImageSharp {
-          fluid(maxWidth: 400) {
-            ...GatsbyImageSharpFluid_noBase64
-          }
-        }
-      },playstore:file(relativePath: { eq: "playstore.png" }) {
-        childImageSharp {
-          fluid(maxWidth: 400) {
-            ...GatsbyImageSharpFluid_noBase64
-          }
-        }
-      },
-      appstore:file(relativePath: { eq: "app_store.png" }) {
-        childImageSharp {
-          fluid(maxWidth: 400) {
-            ...GatsbyImageSharpFluid_noBase64
-          }
-        }
-      },
-    }
-  `);
   return (
     <header className="header">
       <div className="container">
@@ -90,14 +65,17 @@ const Header = ({
             }}
             >
               {headerLink && (
-              <Link to="/" className="navbar-item is-desktop">
+              <Link href="/" className="navbar-item is-desktop">
                 <div className="app-logo">
                   {/* <AppLogo /> */}
-                  <img
-                    src={data.logoImage.childImageSharp.fluid.src}
-                    alt="Teji Mandi"
-                    height={100}
-                  />
+                  <Image
+
+src="/img/logo.png"
+alt="Teji Mandi"
+width={400}
+height="auto"
+/>
+                 
                   {/* <h1>Teji <span className="header-text">Mandi</span></h1> */}
                 </div>
               </Link>
@@ -105,10 +83,13 @@ const Header = ({
               {!headerLink && (
               <div className="app-logo">
                 {/* <AppLogo /> */}
-                <img
-                  src={data.logoImage.childImageSharp.fluid.src}
-                  alt="Teji Mandi"
-                />
+                <Image
+
+src="/img/logo.png"
+alt="Teji Mandi"
+width={400}
+height="auto"
+/>
                 {/* <h1>Teji <span className="header-text">Mandi</span></h1> */}
               </div>
               )}
@@ -119,8 +100,8 @@ const Header = ({
                     target="_blank"
                     rel="noreferrer"
                   >
-                    {getOS() === 'android' && <img src={data.playstore.childImageSharp.fluid.src} alt="Google Play" style={{ height: '40px' }} />}
-                    {getOS() === 'ios' && <img src={data.appstore.childImageSharp.fluid.src} alt="Apple Store" style={{ height: '40px' }} />}
+                    {getOS() === 'android' && <Image height={40} width="auto" src="/img/playstore.png" alt="Google Play" style={{ height: '40px' }} />}
+                    {getOS() === 'ios' && <Image height={40} width="auto" src="/img/app_store.png" alt="Apple Store" style={{ height: '40px' }} />}
 
                   </a>
 
@@ -134,40 +115,40 @@ const Header = ({
 
             <>
               <Link
-                to="/#how-it-works"
+                href="/#how-it-works"
                 activeClassName="is-active"
                 className="navbar-item is-desktop"
-                onClick={(e) => {
-                  if (window.location.pathname === '/') {
-                    e.preventDefault();
-                    scrollTo('#how-it-works');
-                  }
-                }}
+                // onClick={(e) => {
+                //   if (window.location.pathname === '/') {
+                //     e.preventDefault();
+                //     scrollTo('#how-it-works');
+                //   }
+                // }}
               >
                 How It Works
               </Link>
               <Link
-                to="/#performance"
+                href="/#performance"
                 activeClassName="is-active"
                 className="navbar-item is-desktop"
-                onClick={(e) => {
-                  if (window.location.pathname === '/') {
-                    e.preventDefault();
-                    scrollTo('#performance');
-                  }
-                }}
+                // onClick={(e) => {
+                //   if (window.location.pathname === '/') {
+                //     e.preventDefault();
+                //     scrollTo('#performance');
+                //   }
+                // }}
               >
                 Track Record
               </Link>
               <Link
-                to="/research"
+                href="/research"
                 activeClassName="is-active"
                 className="navbar-item is-desktop"
               >
                 Research
               </Link>
               <Link
-                to="https://www.linkedin.com/company/tejimandiapp/jobs/"
+                href="https://www.linkedin.com/company/tejimandiapp/jobs/"
                 target="_blank"
                 activeClassName="is-active"
                 className="navbar-item is-desktop"
@@ -175,15 +156,15 @@ const Header = ({
                 Careers
               </Link>
               <Link
-                to="/#faq"
+                href="/#faq"
                 activeClassName="is-active"
                 className="navbar-item is-desktop"
-                onClick={(e) => {
-                  if (window.location.pathname === '/') {
-                    e.preventDefault();
-                    scrollTo('#faq');
-                  }
-                }}
+                // onClick={(e) => {
+                //   if (window.location.pathname === '/') {
+                //     e.preventDefault();
+                //     scrollTo('#faq');
+                //   }
+                // }}
               >
                 FAQs
               </Link>

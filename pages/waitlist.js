@@ -562,7 +562,7 @@ const Waitlist = (props) => {
                       </a>
                     </div>
                     <div className="link-container">
-                      <Link className="btn-link" to="/research">
+                      <Link className="btn-link" href="/research">
                         Read our research now
                         {' '}
                       </Link>

@@ -4,8 +4,9 @@ import PropTypes from 'prop-types';
 import { useRouter } from 'next/router'
 import Skeleton from '@material-ui/lab/Skeleton';
 import moment from 'moment';
-import { Disqus } from 'gatsby-plugin-disqus';
 import ReactMarkdown from 'react-markdown';
+import {DiscussionEmbed} from "disqus-react"
+import { useRouter } from 'next/router'
 import Layout from './layout';
 import SEO from './seo';
 import BlogHeader from './NewHeader/BlogHeader';
@@ -147,6 +148,7 @@ const BlogPostTemplate = ({
   title,
 }) => {
   let disqusConfig = {};
+  const router = useRouter()
   React.useEffect(() => {
     disqusConfig = {
       url: `${location.origin}/${location.pathname}}`,
@@ -193,14 +195,16 @@ const BlogPostTemplate = ({
           <ul>
             {tags.map((tag) => (
               <li key={`${tag}tag`}>
-                <Link to={`/topics/${kebabCase(tag)}/`}>{tag}</Link>
+                <Link href={`/topics/${kebabCase(tag)}/`}>{tag}</Link>
               </li>
             ))}
           </ul>
         </footer> */}
       </article>
       <div className="disqus-container">
-        <Disqus config={disqusConfig} />
+      <DiscussionEmbed
+        config={disqusConfig}
+      />
       </div>
     </div>
   );

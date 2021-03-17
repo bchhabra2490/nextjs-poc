@@ -148,7 +148,7 @@ const Categories = ({ loading, data }) => (
                 <div className="category">
                   <h1 className="title">{category.name}</h1>
                   <Link
-                    to={`/category?${kebabCase(category.name)}-${
+                    href={`/category?${kebabCase(category.name)}-${
                       category.communityID
                     }`}
                   >

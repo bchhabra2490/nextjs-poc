@@ -2,7 +2,6 @@ import className from 'classnames';
 import React from 'react';
 import PropTypes from 'prop-types';
 import Link from 'next/link';
-import scrollTo from 'gatsby-plugin-smoothscroll';
 import MenuIcon from '../../assets/svgs/Hamburger';
 import TwitterIcon from '../../assets/svgs/Twitter';
 import Instagram from '../../assets/svgs/Instagram';
@@ -48,11 +47,11 @@ const Sidebar = ({ open, handleSidebar }) => {
             <ul>
               <li>
                 <Link
-                  to="/#how-it-works"
+                  href="/#how-it-works"
                   activeClassName="is-active"
                   onClick={(event) => {
                     handleSidebar(false);
-                    scrollTo('#how-it-works');
+                    // scrollTo('#how-it-works');
                   }}
                 >
                   How It Works
@@ -60,24 +59,24 @@ const Sidebar = ({ open, handleSidebar }) => {
               </li>
               <li>
                 <Link
-                  to="/#performance"
+                  href="/#performance"
                   activeClassName="is-active"
                   onClick={(event) => {
                     handleSidebar(false);
-                    scrollTo('#performance');
+                    // scrollTo('#performance');
                   }}
                 >
                   Track Record
                 </Link>
               </li>
               <li>
-                <Link to="/research" activeClassName="is-active">
+                <Link href="/research" activeClassName="is-active">
                   Research
                 </Link>
               </li>
               <li>
                 <Link
-                  to="https://www.linkedin.com/company/tejimandiapp/jobs/"
+                  href="https://www.linkedin.com/company/tejimandiapp/jobs/"
                   target="_blank"
                   activeClassName="is-active"
                 >
@@ -86,10 +85,10 @@ const Sidebar = ({ open, handleSidebar }) => {
               </li>
               <li>
                 <Link
-                  to="/#faq"
+                  href="/#faq"
                   onClick={(event) => {
                     handleSidebar(false);
-                    scrollTo('#faq');
+                    // scrollTo('#faq');
                   }}
                 >
                   FAQs
@@ -97,14 +96,14 @@ const Sidebar = ({ open, handleSidebar }) => {
               </li>
               <li>
                 <Link
-                  to="/legal/privacy"
+                  href="/legal/privacy"
                 >
                   Privacy Policy
                 </Link>
               </li>
               <li>
                 <Link
-                  to="/legal/terms"
+                  href="/legal/terms"
                 >
                   Terms and Conditions
                 </Link>

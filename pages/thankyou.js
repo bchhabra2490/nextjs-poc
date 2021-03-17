@@ -3,8 +3,7 @@ import {
   Grid, Container, Typography, Hidden,
 
 } from '@material-ui/core';
-import { useStaticQuery, graphql } from 'gatsby';
-
+import Image from 'next/image';
 import { ThemeProvider, makeStyles } from '@material-ui/core/styles';
 import SEO from '../components/seo';
 import defaultTheme from '../theme-material-ui/theme';
@@ -55,17 +54,6 @@ const useStyles = makeStyles((theme) => ({
 
 const ThankYouPage = ({ location }) => {
   const classes = useStyles();
-  const data = useStaticQuery(graphql`
-  query {
-    logoImage: file(relativePath: { eq: "logo.png" }) {
-      childImageSharp {
-        fluid(maxWidth: 400) {
-          ...GatsbyImageSharpFluid_noBase64
-        }
-      }
-    },
-  }
-`);
 
   // useScript('https://www.googletagmanager.com/gtag/js?id=AW-742207070');
 
@@ -84,9 +72,11 @@ const ThankYouPage = ({ location }) => {
         <Container maxWidth={false} className={classes.container}>
           <Grid container>
             <Grid item xs={12} className={classes.appLogo}>
-              <img
-                src={data.logoImage.childImageSharp.fluid.src}
+              <Image
+                src="/img/logo.png"
                 alt="Teji Mandi"
+                width={400}
+height="auto"
                 className={classes.appLogoImage}
               />
             </Grid>

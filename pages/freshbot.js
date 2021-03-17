@@ -5,8 +5,8 @@ import Layout from '../components/layout';
 import SEO from '../components/seo';
 
 const NotFoundPage = ({ location }) => {
-  const params = queryString.parse(location.search);
-  const router = useRouter();
+  const router = useRouter()
+  const params = router.query
 
   useEffect(() => {
     const timer = setTimeout(() => {

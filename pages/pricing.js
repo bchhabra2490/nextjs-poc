@@ -4,9 +4,7 @@ import {
   Grid, Typography, Hidden,
 } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-import {
-  useStaticQuery, graphql,
-} from 'gatsby';
+import Image from 'next/image';
 import Layout from '../components/layout';
 import SEO from '../components/seo';
 
@@ -100,38 +98,15 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const StaticContent = () => {
-  try {
-    window.fcWidget.hide();
-  } catch (er) {
-    console.log(er);
+  if(window != 'undefined' && window.fcWidget != 'undefined'){
+    try {
+      window.fcWidget.hide();
+    } catch (er) {
+      console.log(er);
+    }
   }
 
   const classes = useStyles();
-
-  const data = useStaticQuery(graphql`
-    query {
-      logo: file(relativePath: { eq: "Favicon 96x96.png" }) {
-        childImageSharp {
-          fluid(maxWidth: 400) {
-            ...GatsbyImageSharpFluid_noBase64
-          }
-        }
-      },
-      playstore:file(relativePath: { eq: "playstore.png" }) {
-        childImageSharp {
-          fluid(maxWidth: 400) {
-            ...GatsbyImageSharpFluid_noBase64
-          }
-        }
-      },
-      appstore:file(relativePath: { eq: "app_store.png" }) {
-        childImageSharp {
-          fluid(maxWidth: 400) {
-            ...GatsbyImageSharpFluid_noBase64
-          }
-        }
-      },
-      }`);
 
   return (
     <Layout>
@@ -192,7 +167,7 @@ const StaticContent = () => {
                 className={classes.pricingText}
                 style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}
               >
-                <img src={data.logo.childImageSharp.fluid.src} alt="" className={classes.logo} />
+                <Image src="/img/Favicon 96x96.png" alt="" className={classes.logo} layout='fill' />
                 Teji Mandi Subscription
               </Typography>
             </Grid>
@@ -247,7 +222,7 @@ const StaticContent = () => {
                   target="_blank"
                   rel="noreferrer"
                 >
-                  <img src={data.playstore.childImageSharp.fluid.src} alt="Google Play" className={classes.appStoreImage} />
+                  <Image src="/img/playstore.png" alt="Google Play" height={50} width="auto" className={classes.appStoreImage} />
                 </a>
               </div>
               <div>
@@ -256,7 +231,7 @@ const StaticContent = () => {
                   href={getAppLink('apple')}
                   target="_blank"
                 >
-                  <img src={data.appstore.childImageSharp.fluid.src} alt="Apple Store" className={classes.appStoreImage} />
+                  <Image src="/img/app_store.png" alt="Apple Store" height={50} width="auto" className={classes.appStoreImage} />
                 </a>
 
               </div>

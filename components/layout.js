@@ -10,7 +10,6 @@ import LoginModal from './login-modal';
 const Layout = ({
   children,
   hideHeader,
-  location,
   showModal,
   showLinks,
   onClose,
@@ -34,7 +33,6 @@ const Layout = ({
       {!hideHeader && (
         <Header
           siteTitle={"Teji Mandi"}
-          location={location}
           showLinks={showLinks}
           handleSidebar={toggleSidebar}
           showMenu={showMenu}
@@ -59,7 +57,6 @@ const Layout = ({
 
 Layout.propTypes = {
   children: PropTypes.node.isRequired,
-  location: PropTypes.instanceOf(Object),
   hideHeader: PropTypes.bool,
   showModal: PropTypes.bool,
   showLinks: PropTypes.bool,
@@ -72,7 +69,6 @@ Layout.defaultProps = {
   hideHeader: false,
   showModal: false,
   showLinks: true,
-  location: {},
   showFooterSocialLinks: true,
   showFooter: true,
   showMenu: true,

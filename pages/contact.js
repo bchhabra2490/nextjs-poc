@@ -4,7 +4,7 @@ import Layout from '../components/layout';
 import SEO from '../components/seo';
 import LaunchForm from '../components/LaunchForm';
 
-const StaticContent = ({ location }) => {
+const StaticContent = () => {
   try {
     window.fcWidget.hide();
   } catch (er) {
@@ -19,14 +19,10 @@ const StaticContent = ({ location }) => {
             <h2 className="title">CONTACT US</h2>
           </div>
         </div>
-        <LaunchForm location={location} title="Have an advisor call you back" showRequirements />
+        <LaunchForm title="Have an advisor call you back" showRequirements />
       </section>
     </Layout>
   );
-};
-
-StaticContent.propTypes = {
-  location: PropTypes.instanceOf(Object).isRequired,
 };
 
 export default StaticContent;

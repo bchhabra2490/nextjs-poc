@@ -11,7 +11,8 @@ import {
 import { useRouter } from 'next/router'
 import Snackbar from '@material-ui/core/Snackbar';
 import MuiAlert from '@material-ui/lab/Alert';
-import { useStaticQuery, graphql } from 'gatsby';
+import Image from 'next/image';
+
 import SEO from '../components/seo';
 import ContactFooter from '../components/contact-footer';
 import defaultTheme from '../theme-material-ui/theme';
@@ -318,9 +319,11 @@ const KnowHowToInvestPage = ({ location }) => {
         <Container maxWidth={false} className={classes.container}>
           <Grid container>
             <Grid item xs={12} className={classes.appLogo}>
-              <img
-                src={data.logoImage.childImageSharp.fluid.src}
+              <Image
+                src="/img/logo.png"
                 alt="Teji Mandi"
+                width={400}
+height="auto"
                 className={classes.appLogoImage}
               />
             </Grid>
@@ -403,7 +406,8 @@ const KnowHowToInvestPage = ({ location }) => {
 
               <Grid container>
                 <Grid item xs={12}>
-                  <img src={data.graphImage.childImageSharp.fluid.src} alt="" className={classes.graphImage} />
+                <Image
+                src="/img/graph.png" alt="" className={classes.graphImage} />
                 </Grid>
               </Grid>
 

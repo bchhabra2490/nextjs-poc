@@ -30,7 +30,7 @@ const Tags = ({ tags }) => {
     tags,
     (tag) => size(tag) > 0 && (
     <li key={`${tag}tag`}>
-      <Link onClick={handleClick} to={`/topics/${kebabCase(tag)}/`}>
+      <Link onClick={handleClick} href={`/topics/${kebabCase(tag)}/`}>
         {tag}
       </Link>
     </li>
@@ -164,7 +164,7 @@ const Post = ({ post }) => {
         <div className="card-image">
           <figure className="image">
             <Link
-              to={`/research/${post.communityID}/${post.ID}?${kebabCase(content.title)}`}
+              href={`/research/${post.communityID}/${post.ID}?${kebabCase(content.title)}`}
               key={post.ID}
             >
               {content.image && (
@@ -185,14 +185,14 @@ const Post = ({ post }) => {
         </div>
         <div className="card-content">
           <Link
-            to={`/research/${post.communityID}/${post.ID}?${kebabCase(content.title)}`}
+            href={`/research/${post.communityID}/${post.ID}?${kebabCase(content.title)}`}
             key={post.ID}
           >
             <h5 className="title">{content.title}</h5>
           </Link>
           <div className="content">
             <Link
-              to={`/research/${post.communityID}/${post.ID}?${kebabCase(content.title)}`}
+              href={`/research/${post.communityID}/${post.ID}?${kebabCase(content.title)}`}
               key={post.ID}
             >
               <p>{content.shortDesc}</p>
@@ -204,7 +204,7 @@ const Post = ({ post }) => {
         </div> */}
         <footer className="card-footer">
           <Link
-            to={`/research/${post.communityID}/${post.ID}?${kebabCase(content.title)}`}
+            href={`/research/${post.communityID}/${post.ID}?${kebabCase(content.title)}`}
             key={post.ID}
           >
             <p className="date">

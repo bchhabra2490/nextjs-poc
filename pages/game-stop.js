@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import {
   Grid, Typography, Hidden,
 } from '@material-ui/core';
-import { useStaticQuery, graphql } from 'gatsby';
+import Image from 'next/image'
 import GameStopSVG from '../assets/svgs/game-stop';
 import SEO from '../components/seo';
 import defaultTheme from '../theme-material-ui/theme';
@@ -76,14 +76,14 @@ const GameStop = ({ location }) => {
           }
         }
       },
-      playstore:file(relativePath: { eq: "playstore.png" }) {
+      playstore:file(relativePath: { eq: "/img/playstore.png" }) {
         childImageSharp {
           fluid(maxWidth: 400) {
             ...GatsbyImageSharpFluid_noBase64
           }
         }
       },
-      appstore:file(relativePath: { eq: "app_store.png" }) {
+      appstore:file(relativePath: { eq: "/img/app_store.png" }) {
         childImageSharp {
           fluid(maxWidth: 400) {
             ...GatsbyImageSharpFluid_noBase64
@@ -99,9 +99,11 @@ const GameStop = ({ location }) => {
         <div>
           <Grid container>
             <Grid item xs={12} className={classes.appLogo}>
-              <img
-                src={data.logoImage.childImageSharp.fluid.src}
+              <Image
+                src="/img/logo.png"
                 alt="Teji Mandi"
+                width={400}
+height="auto"
                 className={classes.appLogoImage}
               />
               <p className={classes.appText}>Stock Investing, Simplified</p>
@@ -167,7 +169,8 @@ const GameStop = ({ location }) => {
                     target="_blank"
                     rel="noreferrer"
                   >
-                    <img src={data.playstore.childImageSharp.fluid.src} alt="Google Play" className={classes.appStoreImage} />
+                    <Image
+                src="/img/playstore.png" alt="Google Play" className={classes.appStoreImage} />
                   </a>
                 </div>
                 <div>
@@ -176,7 +179,8 @@ const GameStop = ({ location }) => {
                     href="https://apps.apple.com/in/app/teji-mandi-portfolio-advisor/id1531900507"
                     target="_blank"
                   >
-                    <img src={data.appstore.childImageSharp.fluid.src} alt="Apple Store" className={classes.appStoreImage} />
+                    <Image
+                src="/img/app_store.png" alt="Apple Store" className={classes.appStoreImage} />
                   </a>
 
                 </div>

@@ -2,9 +2,7 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { useForm } from 'react-hook-form';
 import { createApolloFetch } from 'apollo-fetch';
-import {
-  useStaticQuery, graphql,
-} from 'gatsby';
+import Image from 'next/image';
 import Snackbar from '@material-ui/core/Snackbar';
 import MuiAlert from '@material-ui/lab/Alert';
 import {
@@ -367,138 +365,6 @@ const IndexPageTemplate = ({
   const [carousalSlide, setCarouselSlide] = useState(0);
   const [howItWorksCarousel, setHowItWorksCarousel] = useState(0);
 
-  const data = useStaticQuery(graphql`
-    query {
-      phone1: file(relativePath: { eq: "1.png" }) {
-        childImageSharp {
-          fluid(maxWidth: 400) {
-            ...GatsbyImageSharpFluid_noBase64
-          }
-        }
-      },
-      phone2: file(relativePath: { eq: "5.png" }) {
-        childImageSharp {
-          fluid(maxWidth: 400) {
-            ...GatsbyImageSharpFluid_noBase64
-          }
-        }
-      },
-      phone3: file(relativePath: { eq: "7.png" }) {
-        childImageSharp {
-          fluid(maxWidth: 400) {
-            ...GatsbyImageSharpFluid_noBase64
-          }
-        }
-      },
-      phone4: file(relativePath: { eq: "4.png" }) {
-        childImageSharp {
-          fluid(maxWidth: 400) {
-            ...GatsbyImageSharpFluid_noBase64
-          }
-        }
-      },
-      va: file(relativePath: { eq: "va.jpeg" }) {
-        childImageSharp {
-          fluid(maxWidth: 400) {
-            ...GatsbyImageSharpFluid_noBase64
-          }
-        }
-      },
-      ra: file(relativePath: { eq: "ra.jpeg" }) {
-        childImageSharp {
-          fluid(maxWidth: 400) {
-            ...GatsbyImageSharpFluid_noBase64
-          }
-        }
-      },
-      am: file(relativePath: { eq: "am.jpeg" }) {
-        childImageSharp {
-          fluid(maxWidth: 400) {
-            ...GatsbyImageSharpFluid_noBase64
-          }
-        }
-      },
-      playstore:file(relativePath: { eq: "playstore.png" }) {
-        childImageSharp {
-          fluid(maxWidth: 400) {
-            ...GatsbyImageSharpFluid_noBase64
-          }
-        }
-      },
-      appstore:file(relativePath: { eq: "app_store.png" }) {
-        childImageSharp {
-          fluid(maxWidth: 400) {
-            ...GatsbyImageSharpFluid_noBase64
-          }
-        }
-      },
-      appstore:file(relativePath: { eq: "app_store.png" }) {
-        childImageSharp {
-          fluid(maxWidth: 400) {
-            ...GatsbyImageSharpFluid_noBase64
-          }
-        }
-      },
-      phoneScreen:file(relativePath: { eq: "phone1.jpg" }) {
-        childImageSharp {
-          fluid(maxWidth: 400) {
-            ...GatsbyImageSharpFluid_noBase64
-          }
-        }
-      },
-      phoneScreen2:file(relativePath: { eq: "phone2.png" }) {
-        childImageSharp {
-          fluid(maxWidth: 400) {
-            ...GatsbyImageSharpFluid_noBase64
-          }
-        }
-      },
-      phoneScreen3:file(relativePath: { eq: "phone3.png" }) {
-        childImageSharp {
-          fluid(maxWidth: 400) {
-            ...GatsbyImageSharpFluid_noBase64
-          }
-        }
-      },
-      phoneScreen4:file(relativePath: { eq: "phone4.png" }) {
-        childImageSharp {
-          fluid(maxWidth: 400) {
-            ...GatsbyImageSharpFluid_noBase64
-          }
-        }
-      },
-      phoneScreen5:file(relativePath: { eq: "phone5.png" }) {
-        childImageSharp {
-          fluid(maxWidth: 400) {
-            ...GatsbyImageSharpFluid_noBase64
-          }
-        }
-      },
-      businessLine:file(relativePath: { eq: "business-line.jpg" }) {
-        childImageSharp {
-          fluid(maxWidth: 400) {
-            ...GatsbyImageSharpFluid_noBase64
-          }
-        }
-      },
-      investmentGuru:file(relativePath: { eq: "investment-guru.png" }) {
-        childImageSharp {
-          fluid(maxWidth: 400) {
-            ...GatsbyImageSharpFluid_noBase64
-          }
-        }
-      },
-      cnbc:file(relativePath: { eq: "cnbc.png" }) {
-        childImageSharp {
-          fluid(maxWidth: 400) {
-            ...GatsbyImageSharpFluid_noBase64
-          }
-        }
-      },
-    }
-  `);
-  console.log('Data', data);
-
   const onEmailSubmit = (formValues) => {
     const values = formValues;
     setFormStatus(FORM_STATUS.SUBMITTING_EMAIL);
@@ -553,25 +419,25 @@ const IndexPageTemplate = ({
 
   const howItWorksDataArray = [
     {
-      image: data.phoneScreen4.childImageSharp.fluid.src,
+      image: "/img/phone4.png",
       header: '1',
       subHeader: 'Sign Up',
       paragraph: 'Login with your phone number, fill in some required details and answer a few questions about your risk level.',
     },
     {
-      image: data.phoneScreen3.childImageSharp.fluid.src,
+      image:  "/img/phone3.png",
       header: '2',
       subHeader: 'Select a Plan',
       paragraph: 'Select from monthly. quarterly & half-yearly plans. Avail discounted pricing on our long term plans.',
     },
     {
-      image: data.phoneScreen5.childImageSharp.fluid.src,
+      image:  "/img/phone5.png",
       header: '3',
       subHeader: 'Select a Broker',
       paragraph: "Select from India's top brokers to start your investment. If you don't have a demat account with any, we will help you open one.",
     },
     {
-      image: data.phoneScreen2.childImageSharp.fluid.src,
+      image:  "/img/phone2.png",
       header: '4',
       subHeader: 'Build your Portfolio',
       paragraph: 'Buy winning stocks and Sell losing stocks in a single shot through our Rebalance advice. Say good-bye to complicated trading interfaces.',
@@ -580,19 +446,19 @@ const IndexPageTemplate = ({
 
   const pressData = [
     {
-      image: data.cnbc.childImageSharp.fluid.src,
+      image:  "/img/cnbc.png",
       text: 'Teji Mandi to revolutionize investment for retail investors with equity investment advisory.',
       link: 'https://www.cnbctv18.com/market/teji-mandi-to-revolutionize-investment-for-retail-investors-with-equity-investment-advisory-8339821.html',
       title: 'CNBC',
     },
     {
-      image: data.businessLine.childImageSharp.fluid.src,
+      image: "/img/business-line.png",
       text: 'Motilal launches retail advisory service TejiMandi.',
       link: 'https://www.thehindubusinessline.com/markets/stock-markets/motilal-launches-retail-advisory-service-tejimandi/article33843507.ece',
       title: 'Business Line',
     },
     {
-      image: data.investmentGuru.childImageSharp.fluid.src,
+      image:  "/img/investment-guru.png",
       text: 'TejiMandi to revolutionize equity investment for retail investors with equity investment advisory.',
       link: 'http://bit.ly/3qnoq7D',
       title: 'Investment Guru India',
@@ -696,7 +562,7 @@ const IndexPageTemplate = ({
           </Grid> */}
           <Grid container>
             <Grid item xs={12} style={{ textAlign: 'center', lineHeight: '0' }}>
-              <img src={data.phoneScreen.childImageSharp.fluid.src} alt="" style={{ height: '350px' }} />
+              <Image src="/img/phonescreen.png" alt="" height={350} width="auto" />
 
             </Grid>
           </Grid>
@@ -795,7 +661,7 @@ const IndexPageTemplate = ({
                       target="_blank"
                       rel="noreferrer"
                     >
-                      <img src={data.playstore.childImageSharp.fluid.src} alt="Google Play" style={{ height: '65px' }} className={classes.appStoreImage} />
+                      <Image src="/img/playstore.png" alt="Google Play" height={50} width="auto" className={classes.appStoreImage} />
                     </a>
                   </div>
                   <div>
@@ -804,7 +670,7 @@ const IndexPageTemplate = ({
                       href={getAppLink('apple')}
                       target="_blank"
                     >
-                      <img src={data.appstore.childImageSharp.fluid.src} alt="Apple Store" style={{ height: '65px' }} className={classes.appStoreImage} />
+                      <Image src="/img/app_store.png" alt="Apple Store" height={50} width="auto" className={classes.appStoreImage} />
                     </a>
 
                   </div>
@@ -815,7 +681,7 @@ const IndexPageTemplate = ({
             <Grid item sm={1} md={1} />
 
             <Grid sm={4} md={4} style={{ textAlign: 'left', lineHeight: '0' }}>
-              <img src={data.phoneScreen.childImageSharp.fluid.src} alt="" />
+            <Image src="/img/phonescreen.png" alt="" height="auto" width={400} />
             </Grid>
           </Grid>
         </Hidden>
@@ -1384,7 +1250,7 @@ const IndexPageTemplate = ({
                 target="_blank"
                 rel="noreferrer"
               >
-                <img src={data.playstore.childImageSharp.fluid.src} alt="Google Play" className={classes.appStoreImage} />
+                <Image src="/img/playstore.png" alt="Google Play" height={50} width="auto" className={classes.appStoreImage} />
               </a>
             </div>
             <div>
@@ -1393,7 +1259,7 @@ const IndexPageTemplate = ({
                 href={getAppLink('apple')}
                 target="_blank"
               >
-                <img src={data.appstore.childImageSharp.fluid.src} alt="Apple Store" className={classes.appStoreImage} />
+                <Image src="/img/app_store.png" alt="Apple Store" height={50} width="auto" className={classes.appStoreImage} />
               </a>
 
             </div>
@@ -1416,7 +1282,7 @@ const IndexPageTemplate = ({
       </section>
       )}
       <div>
-        {showChart && <ChartSection getAppLink={getAppLink} showAppDownloads={showAppDownloads} playstoreImg={data.playstore} appStoreImg={data.appstore} paretClasses={classes} />}
+        {showChart && <ChartSection getAppLink={getAppLink} showAppDownloads={showAppDownloads} paretClasses={classes} />}
         {/* -------------------TEAM----------*/}
         {showTeam && (
         <section className="wrapper-container">
@@ -1429,7 +1295,7 @@ const IndexPageTemplate = ({
           <Container>
             <Grid container>
               <Grid item xs={12} sm={4} style={{ textAlign: 'center' }}>
-                <img src={data.va.childImageSharp.fluid.src} className={classes.teamMemberPic} alt="Vaibhav Agrawal" />
+                <Image src="/img/va.jpeg"  height={200} width="auto" className={classes.teamMemberPic} alt="Vaibhav Agrawal" />
               </Grid>
               <Grid item xs={12} sm={8}>
                 <Typography
@@ -1463,7 +1329,7 @@ const IndexPageTemplate = ({
             </Grid>
             <Grid container>
               <Grid item xs={12} sm={4} style={{ textAlign: 'center' }}>
-                <img src={data.ra.childImageSharp.fluid.src} className={classes.teamMemberPic} alt="Mr. Raamdeo Agrawal" />
+              <Image src="/img/ra.jpeg" height={200} width="auto" className={classes.teamMemberPic} alt="Mr. Raamdeo Agrawal" />
               </Grid>
               <Grid item xs={12} sm={8}>
                 <Typography
@@ -1492,7 +1358,7 @@ const IndexPageTemplate = ({
             </Grid>
             <Grid container>
               <Grid item xs={12} sm={4} style={{ textAlign: 'center' }}>
-                <img src={data.am.childImageSharp.fluid.src} className={classes.teamMemberPic} alt="Mr. Ajay Menon" />
+              <Image src="/img/am.jpeg" height={200} width="auto" className={classes.teamMemberPic} alt="Mr. Ajay Menon" />
               </Grid>
               <Grid item xs={12} sm={8}>
                 <Typography
@@ -1546,7 +1412,7 @@ const IndexPageTemplate = ({
                   target="_blank"
                   rel="noreferrer"
                 >
-                  <img src={data.playstore.childImageSharp.fluid.src} alt="Google Play" className={classes.appStoreImage} />
+                  <Image src="/img/playstore.png" height={50} width="auto" alt="Google Play" className={classes.appStoreImage} />
                 </a>
               </div>
               <div>
@@ -1555,7 +1421,7 @@ const IndexPageTemplate = ({
                   href={getAppLink('apple')}
                   target="_blank"
                 >
-                  <img src={data.appstore.childImageSharp.fluid.src} alt="Apple Store" className={classes.appStoreImage} />
+                  <Image src="/img/app_store.png" height={50} width="auto" alt="Apple Store" className={classes.appStoreImage} />
                 </a>
 
               </div>
@@ -1826,7 +1692,7 @@ const IndexPageTemplate = ({
                   target="_blank"
                   rel="noreferrer"
                 >
-                  <img src={data.playstore.childImageSharp.fluid.src} alt="Google Play" className={classes.appStoreImage} />
+                  <Image src="/img/playstore.png" height={50} width="auto" alt="Google Play" className={classes.appStoreImage} />
                 </a>
               </div>
               <div>
@@ -1835,7 +1701,7 @@ const IndexPageTemplate = ({
                   href={getAppLink('apple')}
                   target="_blank"
                 >
-                  <img src={data.appstore.childImageSharp.fluid.src} alt="Apple Store" className={classes.appStoreImage} />
+                  <Image src="/img/app_store.png" height={50} width="auto" alt="Apple Store" className={classes.appStoreImage} />
                 </a>
 
               </div>
@@ -2205,7 +2071,7 @@ const IndexPageTemplate = ({
                 target="_blank"
                 rel="noreferrer"
               >
-                <img src={data.playstore.childImageSharp.fluid.src} alt="Google Play" className={classes.appStoreImage} />
+                <Image src="/img/playstore.png" height={50} width="auto" alt="Google Play" className={classes.appStoreImage} />
               </a>
             </div>
             <div>
@@ -2214,7 +2080,7 @@ const IndexPageTemplate = ({
                 href={getAppLink('apple')}
                 target="_blank"
               >
-                <img src={data.appstore.childImageSharp.fluid.src} alt="Apple Store" className={classes.appStoreImage} />
+                <Image src="/img/app_store.png" height={50} width="auto" alt="Apple Store" className={classes.appStoreImage} />
               </a>
 
             </div>

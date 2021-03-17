@@ -10,7 +10,6 @@ import { useForm } from 'react-hook-form';
 import { createApolloFetch } from 'apollo-fetch';
 import { useRouter } from 'next/router'
 import { ThemeProvider, makeStyles } from '@material-ui/core/styles';
-import queryString from 'query-string';
 import Snackbar from '@material-ui/core/Snackbar';
 import MuiAlert from '@material-ui/lab/Alert';
 import PropTypes from 'prop-types';
@@ -90,7 +89,7 @@ const FORM_STATUS = {
   FAILED: 'FAILED',
 };
 
-const LaunchForm = ({ location, showRequirements, title }) => {
+const LaunchForm = ({ showRequirements, title }) => {
   const classes = useStyles();
   const router = useRouter();
 
@@ -98,7 +97,8 @@ const LaunchForm = ({ location, showRequirements, title }) => {
   const [formStatus, setFormStatus] = React.useState(FORM_STATUS.IDLE);
   const [requirements, setRequirements] = React.useState('');
   const { register, handleSubmit, errors } = useForm();
-  const params = queryString.parse(location.search);
+  
+  const params = router.query;
 
   const onSubmit = (formValues) => {
     const values = formValues;
@@ -270,7 +270,6 @@ const LaunchForm = ({ location, showRequirements, title }) => {
 };
 
 LaunchForm.propTypes = {
-  location: PropTypes.instanceOf(Object).isRequired,
   showRequirements: PropTypes.bool,
   title: PropTypes.string,
 };

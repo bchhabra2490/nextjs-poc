@@ -38,7 +38,7 @@ const query = `
 `;
 
 const Transaction = () => {
-  if (typeof window !== 'undefined') {
+  if (typeof window !== 'undefined' && window.fcWidget != 'undefined') {
     try {
       window.fcWidget.hide();
     } catch (er) {

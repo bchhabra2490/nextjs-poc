@@ -1,20 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { useStaticQuery, graphql } from 'gatsby';
 import SubscribeForm from './SubscribeForm';
 
 const Subscribe = ({ showVisible }) => {
-  const data = useStaticQuery(graphql`
-    query {
-      placeholderImage: file(relativePath: { eq: "playstore_round.png" }) {
-        childImageSharp {
-          fluid(maxWidth: 160) {
-            ...GatsbyImageSharpFluid_noBase64
-          }
-        }
-      }
-    }
-  `);
   // const handleVisible = (isVisible) => {
   //   if (isVisible) {
   //     document.getElementById('share-post').classList.add('animated');
