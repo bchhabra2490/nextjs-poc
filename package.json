@@ -5,10 +5,13 @@
   "main": "function.js",
   "scripts": {
     "dev": "next dev -p 5000",
-    "build": "next build",
+    "build": "env-cmd .env.production next build",
+    "build:staging": "env-cmd .env.staging next build",
     "start": "next start",
-    "export": "next export",
-    "heroku-postbuild": "npm run build"
+    "export": "next export"
+  },
+  "browser": {
+    "child_process": false
   },
   "dependencies": {
     "@apollo/client": "^3.3.12",
@@ -22,6 +25,7 @@
     "classnames": "^2.2.6",
     "disqus-react": "^1.0.11",
     "dotenv": "^8.2.0",
+    "env-cmd": "^10.1.0",
     "firebase": "^8.2.6",
     "firebase-admin": "^9.5.0",
     "firebase-functions": "^3.13.2",
@@ -40,6 +44,7 @@
     "react-hook-form": "^6.15.1",
     "react-markdown": "^5.0.3",
     "react-share": "^4.3.1",
-    "sass": "^1.32.6"
+    "sass": "^1.32.6",
+    "sitemap": "^6.4.0"
   }
 }

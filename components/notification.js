@@ -1,5 +1,4 @@
 import React, { useState } from "react"
-import { useStaticQuery, graphql } from "gatsby"
 import CloseIcon from "../assets/svgs/Close"
 
 const Notification = () => {
@@ -8,17 +7,7 @@ const Notification = () => {
     notification = localStorage.getItem("notification") || 1
   }
   const [isShow, setShow] = useState(Number(notification))
-  const data = useStaticQuery(graphql`
-    query {
-      logoImage: file(relativePath: { eq: "logo.png" }) {
-        childImageSharp {
-          fluid(maxWidth: 150) {
-            ...GatsbyImageSharpFluid_noBase64
-          }
-        }
-      }
-    }
-  `)
+  
   const handleClose = () => {
     setShow(0)
     localStorage.setItem("notification", false)
@@ -32,7 +21,7 @@ const Notification = () => {
       >
         <div className="notification-icon">
           <img
-            src={data.logoImage.childImageSharp.fluid.src}
+            src="/static/logo.png"
             alt="Tejimandi"
             style={{ position: "relative", top: "-10px" }}
           />

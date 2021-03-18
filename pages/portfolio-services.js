@@ -1,6 +1,6 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
-import queryString from 'query-string';
+import { useRouter } from 'next/router'
 import { createApolloFetch } from 'apollo-fetch';
 import { ThemeProvider, makeStyles } from '@material-ui/core/styles';
 import PropTypes from 'prop-types';
@@ -189,7 +189,7 @@ const FORM_STATUS = {
   FAILED: 'FAILED',
 };
 
-const PortfolioServices = ({ location }) => {
+const PortfolioServices = ({ params }) => {
   const classes = useStyles();
   const router = useRouter();
 
@@ -198,7 +198,6 @@ const PortfolioServices = ({ location }) => {
   } catch (er) {
     console.log(er);
   }
-  const params = queryString.parse(location.search);
 
   const [formStatus, setFormStatus] = React.useState(FORM_STATUS.IDLE);
   const [name, setName] = React.useState('');
@@ -554,6 +553,15 @@ const PortfolioServices = ({ location }) => {
 
   );
 };
+
+
+export async function getServerSideProps({query}) {
+  return {
+    props: {
+      params: query,
+    }, // will be passed to the page component as props
+  }
+}
 
 PortfolioServices.propTypes = {
   location: PropTypes.instanceOf(Object).isRequired,

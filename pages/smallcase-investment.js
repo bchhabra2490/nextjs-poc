@@ -207,7 +207,7 @@ const FORM_STATUS = {
   FAILED: 'FAILED',
 };
 
-const SmallcaseInvestmentPage = ({ location }) => {
+const SmallcaseInvestmentPage = ({ params }) => {
   const classes = useStyles();
   const router = useRouter();
   try {
@@ -215,7 +215,6 @@ const SmallcaseInvestmentPage = ({ location }) => {
   } catch (er) {
     console.log(er);
   }
-  const params = queryString.parse(location.search);
 
   const [formStatus, setFormStatus] = React.useState(FORM_STATUS.IDLE);
   const [name, setName] = React.useState('');
@@ -683,6 +682,14 @@ const SmallcaseInvestmentPage = ({ location }) => {
 
   );
 };
+
+export async function getServerSideProps({query}) {
+  return {
+    props: {
+      params: query,
+    }, // will be passed to the page component as props
+  }
+}
 
 SmallcaseInvestmentPage.propTypes = {
   location: PropTypes.instanceOf(Object).isRequired,

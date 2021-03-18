@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { createApolloFetch } from 'apollo-fetch';
-import { useRouter } from 'next/router'
+import { setContext } from '@apollo/client/link/context';
+import { ApolloClient, InMemoryCache, gql, createHttpLink } from '@apollo/client';
 import Skeleton from '@material-ui/lab/Skeleton';
 import moment from 'moment';
 import { DiscussionEmbed } from 'disqus-react';
@@ -12,32 +12,6 @@ import { HTMLContent } from '../../../components/content';
 
 const uri = `${process.env.NEXT_PUBLIC_API_URL}/graphql`;
 console.log('API URL: ', uri);
-const apolloFetch = createApolloFetch({ uri });
-
-const query = `
-  query getMessages ($getMessageData: GetMessageData!) {
-    getMessages (messages: [$getMessageData]) {
-        ID
-        communityID
-        content
-        creator {
-          ID
-          username
-          fullname
-          gender
-          verified
-          profilePic
-          followStatus
-        }
-        createdOn
-        messageType
-        lastUpdated
-        status
-        statusMessage
-        __typename
-    }
-  }
-`;
 
 const PostLoader = () => (
   <div className="inner">
@@ -148,7 +122,7 @@ const BlogPostTemplate = ({
   let location = {
     href: ''
   };
-  if (window) {
+  if (typeof window != 'undefined') {
    location = window.location;
   }  
   React.useEffect(() => {
@@ -212,49 +186,14 @@ const BlogPostTemplate = ({
   );
 };
 
-const Post = ({params }) => {
-  console.log(params);
-  const router = useRouter();
+const Post = ({posts, params, loading }) => {
+  let message = posts[0];
   let location = {
     href: ''
   };
   if (typeof window != 'undefined') {
    location = window.location;
   }  
-  const [message, setMessage] = useState({});
-  const [loading, setLoading] = useState(true);
-  useEffect(() => {
-    setLoading(true);
-    apolloFetch.use(({ request, options }, next) => {
-      if (!options.headers) {
-        options.headers = {};
-      }
-      options.headers = {
-        'api-version': 2,
-      };
-      next();
-    });
-    apolloFetch({
-      query,
-      variables: {
-        getMessageData: {
-          ID: params.mid,
-          communityID: params.cid,
-        },
-      },
-    })
-      .then((response) => {
-        if (response.data.getMessages) {
-          setLoading(false);
-          setMessage(response.data.getMessages[0]);
-        } else if (typeof window !== 'undefined') {
-          router.push('/research');
-        }
-      })
-      .catch(() => {
-        setLoading(false);
-      });
-  }, [params.mid, params.cid]);
 
   const content = (message.content && JSON.parse(message.content)) || {};
   const meta = [
@@ -317,12 +256,71 @@ const Post = ({params }) => {
   );
 };
 
-export async function getServerSideProps({query}) {
-  return {
-    props: {
-      params: query,
-    }, // will be passed to the page component as props
+export async function getServerSideProps({ params }) {
+  // Fetch necessary data for the blog post using params.id
+  const query = gql`
+query getMessages ($getMessageData: GetMessageData!) {
+  getMessages (messages: [$getMessageData]) {
+      ID
+      communityID
+      content
+      creator {
+        ID
+        username
+        fullname
+        gender
+        verified
+        profilePic
+        followStatus
+      }
+      createdOn
+      messageType
+      lastUpdated
+      status
+      statusMessage
+      __typename
   }
+}
+`;
+
+const httpLink = createHttpLink({
+uri: uri,
+});
+
+const authLink = setContext((_, { headers }) => {
+return {
+  headers: {
+    ...headers,
+    'api-version': 2,
+  }
+}
+});
+
+const client = new ApolloClient({
+link: authLink.concat(httpLink),
+cache: new InMemoryCache()
+});
+
+let loading = true;
+
+const { data } = await client.query({
+
+query:query,
+variables: { getMessageData: {
+  ID: params.mid,
+  communityID: params.cid,
+},}
+});
+if(data){
+  loading= false;
+}
+return {
+props: {
+  posts: data.getMessages,
+  params: params,
+  loading: loading
+}
+}
 }
 
 

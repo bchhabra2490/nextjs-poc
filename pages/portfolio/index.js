@@ -1,7 +1,7 @@
 import React from 'react';
 import queryString from 'query-string';
 
-const Portfolio = ({ location }) => {
+const Portfolio = ({ params }) => {
   const connect = () => new Promise((resolve, reject) => {
     window.sc
       .connect()
@@ -144,7 +144,6 @@ const Portfolio = ({ location }) => {
       });
   };
   React.useEffect(() => {
-    const params = queryString.parse(location.search);
     if (params.smallcaseAuthToken && params.type) {
       window.sc.init({ userData: params.smallcaseAuthToken }).then(() => {
         triggerSmallcaseOrder(params.type, params.scid, params.iscid, params.batchTag);
@@ -159,6 +158,14 @@ const Portfolio = ({ location }) => {
   return <div />;
 };
 
+
+export async function getServerSideProps({query}) {
+  return {
+    props: {
+      params: query,
+    }, // will be passed to the page component as props
+  }
+}
 Portfolio.propTypes = {};
 
 export default Portfolio;

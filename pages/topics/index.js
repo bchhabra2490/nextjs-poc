@@ -10,7 +10,7 @@ const TagsPage = () => {
     description:
       'Teji Mandi is an app that helps you build a strong portfolio of high-quality stocks. We are a SEBI Registered Investment Advisor and a Motilal Oswal Subsidiary.',
     author: 'TM Investment Technologies Pvt Ltd.',
-  },
+  };
   return (
     <Layout>
       <section className="section">

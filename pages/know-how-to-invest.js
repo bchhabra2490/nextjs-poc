@@ -191,7 +191,7 @@ const FORM_STATUS = {
   FAILED: 'FAILED',
 };
 
-const KnowHowToInvestPage = ({ location }) => {
+const KnowHowToInvestPage = ({ params }) => {
   const classes = useStyles();
 
   useEffect(() => {
@@ -201,7 +201,6 @@ const KnowHowToInvestPage = ({ location }) => {
       console.log(er);
     }
   }, []);
-  const params = queryString.parse(location.search);
 
   const [formStatus, setFormStatus] = React.useState(FORM_STATUS.IDLE);
   const [name, setName] = React.useState('');
@@ -278,39 +277,6 @@ const KnowHowToInvestPage = ({ location }) => {
       },
     ],
   };
-
-  const data = useStaticQuery(graphql`
-    query {
-      logoImage: file(relativePath: { eq: "logo.png" }) {
-        childImageSharp {
-          fluid(maxWidth: 400) {
-            ...GatsbyImageSharpFluid_noBase64
-          }
-        }
-      },
-      smallcaseLogo: file(relativePath: { eq: "smallcaseLogo.png" }) {
-        childImageSharp {
-          fluid(maxWidth: 400) {
-            ...GatsbyImageSharpFluid_noBase64
-          }
-        }
-      },
-      bottomBear: file(relativePath: { eq: "bottomBear.png" }) {
-        childImageSharp {
-          fluid(maxWidth: 400) {
-            ...GatsbyImageSharpFluid_noBase64
-          }
-        }
-      },
-      graphImage: file(relativePath: { eq: "graph.png" }) {
-        childImageSharp {
-          fluid(maxWidth: 400) {
-            ...GatsbyImageSharpFluid_noBase64
-          }
-        }
-      }
-    }
-  `);
 
   return (
     <>
@@ -587,6 +553,14 @@ const KnowHowToInvestPage = ({ location }) => {
 
   );
 };
+
+export async function getServerSideProps({query}) {
+  return {
+    props: {
+      params: query,
+    }, // will be passed to the page component as props
+  }
+}
 
 KnowHowToInvestPage.propTypes = {
   location: PropTypes.instanceOf(Object).isRequired,

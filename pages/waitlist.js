@@ -49,7 +49,7 @@ const Waitlist = (props) => {
   const [isLoading, setLoading] = React.useState(false);
   const [isOptional, setOptional] = React.useState(false);
   const [values, setValues] = React.useState({});
-  const params = queryString.parse(props.location.search);
+  const params = props.params;
 
   useEffect(() => {
     const newValues = removeEmptyItems({
@@ -576,5 +576,13 @@ const Waitlist = (props) => {
     </Layout>
   );
 };
+
+export async function getServerSideProps({query}) {
+  return {
+    props: {
+      params: query,
+    }, // will be passed to the page component as props
+  }
+}
 
 export default Waitlist;
