@@ -7,7 +7,7 @@ function SEO({
 }) {
   const siteMetadata = {
     title: 'Teji Mandi - Stock Investing, Simplified',
-    siteUrl: process.env.NEXT_SITE_URL,
+    siteUrl: process.env.NEXT_PUBLIC_SITE_URL,
     description:
       'Teji Mandi is an app that helps you build a strong portfolio of high-quality stocks. We are a SEBI Registered Investment Advisor and a Motilal Oswal Subsidiary.',
     author: 'TM Investment Technologies Pvt Ltd.',

@@ -1,7 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Link from 'next/link';
-import Image from 'next/image'
 import {
   Hidden,
 } from '@material-ui/core';
@@ -65,30 +63,26 @@ const Header = ({
             }}
             >
               {headerLink && (
-              <Link href="/" className="navbar-item is-desktop">
+              <a href="/" className="navbar-item is-desktop">
                 <div className="app-logo">
                   {/* <AppLogo /> */}
-                  <Image
+                  <img
 
 src="/img/logo.png"
 alt="Teji Mandi"
-width={400}
-height="auto"
 />
                  
                   {/* <h1>Teji <span className="header-text">Mandi</span></h1> */}
                 </div>
-              </Link>
+              </a>
               )}
               {!headerLink && (
               <div className="app-logo">
                 {/* <AppLogo /> */}
-                <Image
+                <img
 
 src="/img/logo.png"
 alt="Teji Mandi"
-width={400}
-height="auto"
 />
                 {/* <h1>Teji <span className="header-text">Mandi</span></h1> */}
               </div>
@@ -100,8 +94,8 @@ height="auto"
                     target="_blank"
                     rel="noreferrer"
                   >
-                    {getOS() === 'android' && <Image height={40} width="auto" src="/img/playstore.png" alt="Google Play" style={{ height: '40px' }} />}
-                    {getOS() === 'ios' && <Image height={40} width="auto" src="/img/app_store.png" alt="Apple Store" style={{ height: '40px' }} />}
+                    {getOS() === 'android' && <img src="/img/playstore.png" alt="Google Play" style={{ height: '40px' }} />}
+                    {getOS() === 'ios' && <img src="/img/app_store.png" alt="Apple Store" style={{ height: '40px' }} />}
 
                   </a>
 
@@ -114,7 +108,7 @@ height="auto"
           <div className="navbar-menu">
 
             <>
-              <Link
+              <a
                 href="/#how-it-works"
                 activeClassName="is-active"
                 className="navbar-item is-desktop"
@@ -126,8 +120,8 @@ height="auto"
                 // }}
               >
                 How It Works
-              </Link>
-              <Link
+              </a>
+              <a
                 href="/#performance"
                 activeClassName="is-active"
                 className="navbar-item is-desktop"
@@ -139,23 +133,23 @@ height="auto"
                 // }}
               >
                 Track Record
-              </Link>
-              <Link
+              </a>
+              <a
                 href="/research"
                 activeClassName="is-active"
                 className="navbar-item is-desktop"
               >
                 Research
-              </Link>
-              <Link
+              </a>
+              <a
                 href="https://www.linkedin.com/company/tejimandiapp/jobs/"
                 target="_blank"
                 activeClassName="is-active"
                 className="navbar-item is-desktop"
               >
                 Careers
-              </Link>
-              <Link
+              </a>
+              <a
                 href="/#faq"
                 activeClassName="is-active"
                 className="navbar-item is-desktop"
@@ -167,7 +161,7 @@ height="auto"
                 // }}
               >
                 FAQs
-              </Link>
+              </a>
             </>
 
           </div>

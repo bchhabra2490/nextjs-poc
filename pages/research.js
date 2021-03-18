@@ -2,7 +2,6 @@ import Head from 'next/head'
 import styles from '../styles/Home.module.css'
 import { ApolloClient, InMemoryCache, gql, createHttpLink } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
-import Link from 'next/link'
 
 
 export default function Home({posts}) {
@@ -26,10 +25,10 @@ export default function Home({posts}) {
 
         <div className={styles.grid}>
           {posts.map(post=>{
-            return( <Link href={`/post/${post.communityID}/${post.ID}`}><a className={styles.card}>
+            return( <a href={`/post/${post.communityID}/${post.ID}`}><a className={styles.card}>
             <h3>{JSON.parse(post.content).title}</h3>
             <p>{JSON.parse(post.content).shortDesc}</p>
-          </a></Link>)
+          </a></a>)
           })}
          
 

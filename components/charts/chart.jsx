@@ -33,7 +33,7 @@ function calculateInterestValues(interestRate) {
   return (100 * (1 + (interestRate / 100) * (numberOfMonths / 12))).toFixed(2);
 }
 
-const uri = `${process.env.NEXT_API_URL}/graphql`;
+const uri = `${process.env.NEXT_PUBLIC_API_URL}/graphql`;
 
 const apolloFetch = createApolloFetch({ uri });
 
@@ -145,7 +145,7 @@ const ChartSection = ({
 
   useEffect(() => {
     const variables = {
-      scid: process.env.NEXT_SMALLCASE_ID || 'TJMMO_0005',
+      scid: process.env.NEXT_PUBLIC_SMALLCASE_ID || 'TJMMO_0005',
       duration: 'max',
       benchmarkId: '.NSEI',
     };
@@ -179,7 +179,7 @@ const ChartSection = ({
 
   useEffect(() => {
     const variables = {
-      scid: process.env.NEXT_SMALLCASE_ID || 'TJMMO_0005',
+      scid: process.env.NEXT_PUBLIC_SMALLCASE_ID || 'TJMMO_0005',
       duration: selectedPeriod,
       benchmarkId: '.NIFTY500',
     };
@@ -386,7 +386,7 @@ const ChartSection = ({
       </Grid>
 
       {/* {showAppDownloads && (
-      <Hidden item mdUp>
+      <Hidden mdUp>
         <Grid container style={{ textAlign: 'center', marginTop: '30px' }}>
           <Grid item xs={12}>
             <a
@@ -403,7 +403,7 @@ const ChartSection = ({
       </Hidden>
       )} */}
       {showAppDownloads && (
-      <Hidden item smDown>
+      <Hidden smDown>
 
         <div className={paretClasses.appStoreImageDiv}>
           <div>
@@ -412,7 +412,7 @@ const ChartSection = ({
               target="_blank"
               rel="noreferrer"
             >
-              <Image src="/img/playstore.png" height={50} width="auto" alt="Google Play" className={paretClasses.appStoreImage} />
+              <img src="/img/playstore.png" alt="Google Play" className={paretClasses.appStoreImage} />
             </a>
           </div>
           <div>
@@ -421,7 +421,7 @@ const ChartSection = ({
               href="https://apps.apple.com/in/app/teji-mandi-portfolio-advisor/id1531900507"
               target="_blank"
             >
-              <Image src="/img/app_store.png" height={50} width="auto" alt="Apple Store" className={paretClasses.appStoreImage} />
+              <img src="/img/app_store.png" alt="Apple Store" className={paretClasses.appStoreImage} />
             </a>
 
           </div>

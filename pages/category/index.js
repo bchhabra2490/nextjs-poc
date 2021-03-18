@@ -7,7 +7,7 @@ import Layout from '../../components/layout';
 import Posts from '../../components/Posts';
 import SEO from '../../components/seo';
 
-const uri = `${process.env.NEXT_API_URL}/graphql`;
+const uri = `${process.env.NEXT_PUBLIC_API_URL}/graphql`;
 
 const apolloFetch = createApolloFetch({ uri });
 

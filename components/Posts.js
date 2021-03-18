@@ -6,7 +6,6 @@ import map from 'lodash/map';
 import isEmpty from 'lodash/isEmpty';
 import Skeleton from '@material-ui/lab/Skeleton';
 import size from 'lodash/size';
-import Link from 'next/link';
 import PreviewCompatibleImage from './PreviewCompatibleImage';
 import defaultImage from '../img/logo.png';
 
@@ -30,9 +29,9 @@ const Tags = ({ tags }) => {
     tags,
     (tag) => size(tag) > 0 && (
     <li key={`${tag}tag`}>
-      <Link onClick={handleClick} href={`/topics/${kebabCase(tag)}/`}>
+      <a onClick={handleClick} href={`/topics/${kebabCase(tag)}/`}>
         {tag}
-      </Link>
+      </a>
     </li>
     ),
   );
@@ -163,7 +162,7 @@ const Post = ({ post }) => {
       <article className="card">
         <div className="card-image">
           <figure className="image">
-            <Link
+            <a
               href={`/research/${post.communityID}/${post.ID}?${kebabCase(content.title)}`}
               key={post.ID}
             >
@@ -180,30 +179,30 @@ const Post = ({ post }) => {
                   <img src={defaultImage} alt="post-default" />
                 </div>
               )}
-            </Link>
+            </a>
           </figure>
         </div>
         <div className="card-content">
-          <Link
+          <a
             href={`/research/${post.communityID}/${post.ID}?${kebabCase(content.title)}`}
             key={post.ID}
           >
             <h5 className="title">{content.title}</h5>
-          </Link>
+          </a>
           <div className="content">
-            <Link
+            <a
               href={`/research/${post.communityID}/${post.ID}?${kebabCase(content.title)}`}
               key={post.ID}
             >
               <p>{content.shortDesc}</p>
-            </Link>
+            </a>
           </div>
         </div>
         {/* <div style={{ maxWidth: '100%', overflow: 'hidden' }}>
           <Tags tags={[content.sentiment]} />
         </div> */}
         <footer className="card-footer">
-          <Link
+          <a
             href={`/research/${post.communityID}/${post.ID}?${kebabCase(content.title)}`}
             key={post.ID}
           >
@@ -211,7 +210,7 @@ const Post = ({ post }) => {
               {moment(publishedDate).format('MMM DD, YYYY')}
             </p>
             <p className="timestamp">{calculateTime(content.description)}</p>
-          </Link>
+          </a>
         </footer>
       </article>
     </div>

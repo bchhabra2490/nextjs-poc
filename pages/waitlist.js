@@ -11,7 +11,6 @@ import {
   Button,
   CircularProgress,
 } from '@material-ui/core';
-import Link from 'next/link';
 import { createApolloFetch } from 'apollo-fetch';
 import { useForm } from 'react-hook-form';
 import queryString from 'query-string';
@@ -23,7 +22,7 @@ import Layout from '../components/layout';
 import SEO from '../components/seo';
 import theme from '../theme-material-ui/theme';
 
-const uri = `${process.env.NEXT_API_URL}/graphql`;
+const uri = `${process.env.NEXT_PUBLIC_API_URL}/graphql`;
 
 const query = `
   mutation addLead ($data: String!) {
@@ -562,10 +561,10 @@ const Waitlist = (props) => {
                       </a>
                     </div>
                     <div className="link-container">
-                      <Link className="btn-link" href="/research">
+                      <a className="btn-link" href="/research">
                         Read our research now
                         {' '}
-                      </Link>
+                      </a>
                     </div>
                   </div>
                 </div>

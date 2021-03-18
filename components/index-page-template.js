@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { useForm } from 'react-hook-form';
 import { createApolloFetch } from 'apollo-fetch';
-import Image from 'next/image';
 import Snackbar from '@material-ui/core/Snackbar';
 import MuiAlert from '@material-ui/lab/Alert';
 import {
@@ -16,7 +15,7 @@ import { ArrowLeft, ArrowRight } from '@material-ui/icons';
 import ChartSection from './charts/chart';
 import LaunchForm from './LaunchForm';
 
-const uri = `${process.env.NEXT_API_URL}/graphql`;
+const uri = `${process.env.NEXT_PUBLIC_API_URL}/graphql`;
 const apolloFetch = createApolloFetch({ uri });
 const mutations = `
   mutation addLead ($data: String!) {
@@ -52,7 +51,18 @@ function getAppLink(store) {
 }
 
 const useStyles = makeStyles((theme) => ({
-
+  mainHeading: {
+    marginBottom: '40px',
+    [theme.breakpoints.down('sm')]: {
+      marginBottom: '0px',
+    },
+  },
+  subMainHeading: {
+    marginBottom: '40px',
+    [theme.breakpoints.down('sm')]: {
+      marginBottom: '0px',
+    },
+  },
   paperContainer: {
     padding: '2rem',
   },
@@ -452,7 +462,7 @@ const IndexPageTemplate = ({
       title: 'CNBC',
     },
     {
-      image: "/img/business-line.png",
+      image: "/img/business-line.jpg",
       text: 'Motilal launches retail advisory service TejiMandi.',
       link: 'https://www.thehindubusinessline.com/markets/stock-markets/motilal-launches-retail-advisory-service-tejimandi/article33843507.ece',
       title: 'Business Line',
@@ -484,15 +494,15 @@ const IndexPageTemplate = ({
         }}
       >
 
-        <Hidden item mdUp>
+        <Hidden mdUp>
           <Grid container style={{ alignItems: 'center', marginTop: '10px' }}>
             <Grid item sm={1} md={1} />
-            <Grid item xs={12} sm={10} md={10} className="main-heading">
+            <Grid item xs={12} sm={10} md={10} className={`main-heading ${classes.mainHeading}`}>
               <h2>Stock Investing, Simplified</h2>
             </Grid>
           </Grid>
           <Grid container style={{ margin: '10px 0px' }}>
-            <Grid item xs={12} className="main-sub-heading">
+            <Grid item xs={12} className={`main-sub-heading ${classes.subMainHeading}`}>
               <h5>Teji Mandi helps you build a strong long-term portfolio of high quality companies</h5>
 
             </Grid>
@@ -562,23 +572,23 @@ const IndexPageTemplate = ({
           </Grid> */}
           <Grid container>
             <Grid item xs={12} style={{ textAlign: 'center', lineHeight: '0' }}>
-              <Image src="/img/phonescreen.png" alt="" height={350} width="auto" />
+              <img src="/img/phone1.jpg" alt="" style={{ height: '350px', maxWidth: '400px' }} />
 
             </Grid>
           </Grid>
         </Hidden>
-        <Hidden item smDown>
+        <Hidden smDown>
           <Grid container style={{ alignItems: 'center' }}>
             <Grid item sm={1} md={1} />
             <Grid item sm={6} md={6}>
               <Grid container>
 
-                <Grid item xs={12} className="main-heading">
+                <Grid item xs={12} className={`main-heading ${classes.mainHeading}`}>
                   <h2>Stock Investing, Simplified</h2>
                 </Grid>
               </Grid>
               <Grid container>
-                <Grid item xs={12} className="main-sub-heading">
+                <Grid item xs={12} className={`main-sub-heading ${classes.subMainHeading}`}>
                   <h5>Teji Mandi helps you build a strong long-term portfolio of high quality companies</h5>
 
                 </Grid>
@@ -647,7 +657,7 @@ const IndexPageTemplate = ({
                 </Grid>
               </Grid> */}
               {showAppDownloads && (
-              <Hidden item smDown>
+              <Hidden smDown>
 
                 <div style={{
                   display: 'flex',
@@ -661,7 +671,7 @@ const IndexPageTemplate = ({
                       target="_blank"
                       rel="noreferrer"
                     >
-                      <Image src="/img/playstore.png" alt="Google Play" height={50} width="auto" className={classes.appStoreImage} />
+                      <img src="/img/playstore.png" alt="Google Play" className={classes.appStoreImage} />
                     </a>
                   </div>
                   <div>
@@ -670,7 +680,7 @@ const IndexPageTemplate = ({
                       href={getAppLink('apple')}
                       target="_blank"
                     >
-                      <Image src="/img/app_store.png" alt="Apple Store" height={50} width="auto" className={classes.appStoreImage} />
+                      <img src="/img/app_store.png" alt="Apple Store" className={classes.appStoreImage} />
                     </a>
 
                   </div>
@@ -681,7 +691,7 @@ const IndexPageTemplate = ({
             <Grid item sm={1} md={1} />
 
             <Grid sm={4} md={4} style={{ textAlign: 'left', lineHeight: '0' }}>
-            <Image src="/img/phonescreen.png" alt="" height="auto" width={400} />
+            <img src="/img/phone1.jpg" alt="" style={{maxWidth: '400px'}} />
             </Grid>
           </Grid>
         </Hidden>
@@ -691,7 +701,7 @@ const IndexPageTemplate = ({
         {showFooter && (
         <section className="wrapper-container">
 
-          <Hidden item smDown>
+          <Hidden smDown>
             <div style={{ marginTop: '20px' }}>
               <Grid container>
                 <Grid item xs={12} style={{ textAlign: 'center', marginBottom: '10px' }}>
@@ -790,7 +800,7 @@ const IndexPageTemplate = ({
               </Grid>
             </div>
           </Hidden>
-          <Hidden item mdUp>
+          <Hidden mdUp>
             <Grid container>
               <Grid sm={3} md={3} />
               <Grid xs={12} sm={6} md={6}>
@@ -944,8 +954,8 @@ const IndexPageTemplate = ({
           <h2>Teji Mandi In The Press:</h2>
         </Grid>
         <Grid container>
-          {pressData.map((element) => (
-            <Grid item xs={12} sm={4} style={{ justifyContent: 'center', display: 'flex', marginTop: '10px' }}>
+          {pressData.map((element, i) => (
+            <Grid item xs={12} key={i} sm={4} style={{ justifyContent: 'center', display: 'flex', marginTop: '10px' }}>
 
               <Card style={{ maxWidth: 345, width: '100%' }}>
                 <div style={{ textAlign: 'center' }}>
@@ -1128,12 +1138,12 @@ const IndexPageTemplate = ({
           arrows
           value={howItWorksCarousel}
           onChange={setHowItWorksCarousel}
-          slides={howItWorksDataArray.map((element) => (
-            <div>
-              <Hidden item smDown>
+          slides={howItWorksDataArray.map((element, i) => (
+            <div key={i}>
+              <Hidden smDown>
                 <Grid container style={{ alignItems: 'center' }}>
                   <Grid item sm={6} style={{ textAlign: 'center' }}>
-                    <img src={element.image} alt="" className="how-it-works-image" />
+                    <img src={element.image} alt="" className="how-it-works-image" style={{maxWidth: '400px'}} />
 
                   </Grid>
                   <Grid item sm={5}>
@@ -1162,13 +1172,13 @@ const IndexPageTemplate = ({
                 </Grid>
 
               </Hidden>
-              <Hidden item mdUp>
+              <Hidden mdUp>
                 <Grid container>
 
                   <Grid item xs={12}>
                     <Grid container>
                       <Grid item xs={12} style={{ textAlign: 'center' }}>
-                        <img src={element.image} alt="" style={{ height: '350px' }} />
+                        <img src={element.image} alt="" style={{ height: '350px', maxWidth: '400px' }} />
                       </Grid>
                     </Grid>
                     <Grid container>
@@ -1224,7 +1234,7 @@ const IndexPageTemplate = ({
           ]}
         />
         {/* {showAppDownloads && (
-        <Hidden item mdUp>
+        <Hidden mdUp>
           <Grid container style={{ textAlign: 'center', marginTop: '30px' }}>
             <Grid item xs={12}>
               <a
@@ -1241,7 +1251,7 @@ const IndexPageTemplate = ({
         </Hidden>
         )} */}
         {showAppDownloads && (
-        <Hidden item smDown>
+        <Hidden smDown>
 
           <div className={classes.appStoreImageDiv}>
             <div>
@@ -1250,7 +1260,7 @@ const IndexPageTemplate = ({
                 target="_blank"
                 rel="noreferrer"
               >
-                <Image src="/img/playstore.png" alt="Google Play" height={50} width="auto" className={classes.appStoreImage} />
+                <img src="/img/playstore.png" alt="Google Play" className={classes.appStoreImage} />
               </a>
             </div>
             <div>
@@ -1259,7 +1269,7 @@ const IndexPageTemplate = ({
                 href={getAppLink('apple')}
                 target="_blank"
               >
-                <Image src="/img/app_store.png" alt="Apple Store" height={50} width="auto" className={classes.appStoreImage} />
+                <img src="/img/app_store.png" alt="Apple Store" className={classes.appStoreImage} />
               </a>
 
             </div>
@@ -1295,7 +1305,7 @@ const IndexPageTemplate = ({
           <Container>
             <Grid container>
               <Grid item xs={12} sm={4} style={{ textAlign: 'center' }}>
-                <Image src="/img/va.jpeg"  height={200} width="auto" className={classes.teamMemberPic} alt="Vaibhav Agrawal" />
+                <img src="/img/va.jpeg" className={classes.teamMemberPic} alt="Vaibhav Agrawal" />
               </Grid>
               <Grid item xs={12} sm={8}>
                 <Typography
@@ -1329,7 +1339,7 @@ const IndexPageTemplate = ({
             </Grid>
             <Grid container>
               <Grid item xs={12} sm={4} style={{ textAlign: 'center' }}>
-              <Image src="/img/ra.jpeg" height={200} width="auto" className={classes.teamMemberPic} alt="Mr. Raamdeo Agrawal" />
+              <img src="/img/ra.jpeg" className={classes.teamMemberPic} alt="Mr. Raamdeo Agrawal" />
               </Grid>
               <Grid item xs={12} sm={8}>
                 <Typography
@@ -1358,7 +1368,7 @@ const IndexPageTemplate = ({
             </Grid>
             <Grid container>
               <Grid item xs={12} sm={4} style={{ textAlign: 'center' }}>
-              <Image src="/img/am.jpeg" height={200} width="auto" className={classes.teamMemberPic} alt="Mr. Ajay Menon" />
+              <img src="/img/am.jpeg" className={classes.teamMemberPic} alt="Mr. Ajay Menon" />
               </Grid>
               <Grid item xs={12} sm={8}>
                 <Typography
@@ -1386,7 +1396,7 @@ const IndexPageTemplate = ({
 
           </Container>
           {/* {showAppDownloads && (
-          <Hidden item mdUp>
+          <Hidden mdUp>
             <Grid container style={{ textAlign: 'center', marginTop: '30px' }}>
               <Grid item xs={12}>
                 <a
@@ -1403,7 +1413,7 @@ const IndexPageTemplate = ({
           </Hidden>
           )} */}
           {showAppDownloads && (
-          <Hidden item smDown>
+          <Hidden smDown>
 
             <div className={classes.appStoreImageDiv}>
               <div>
@@ -1412,7 +1422,7 @@ const IndexPageTemplate = ({
                   target="_blank"
                   rel="noreferrer"
                 >
-                  <Image src="/img/playstore.png" height={50} width="auto" alt="Google Play" className={classes.appStoreImage} />
+                  <img src="/img/playstore.png" alt="Google Play" className={classes.appStoreImage} />
                 </a>
               </div>
               <div>
@@ -1421,7 +1431,7 @@ const IndexPageTemplate = ({
                   href={getAppLink('apple')}
                   target="_blank"
                 >
-                  <Image src="/img/app_store.png" height={50} width="auto" alt="Apple Store" className={classes.appStoreImage} />
+                  <img src="/img/app_store.png" alt="Apple Store" className={classes.appStoreImage} />
                 </a>
 
               </div>
@@ -1666,7 +1676,7 @@ const IndexPageTemplate = ({
           />
           <Dots value={carousalSlide} onChange={(value) => setCarouselSlide(value)} number={2} />
           {/* {showAppDownloads && (
-          <Hidden item mdUp>
+          <Hidden mdUp>
             <Grid container style={{ textAlign: 'center', marginTop: '30px' }}>
               <Grid item xs={12}>
                 <a
@@ -1683,7 +1693,7 @@ const IndexPageTemplate = ({
           </Hidden>
           )} */}
           {showAppDownloads && (
-          <Hidden item smDown>
+          <Hidden smDown>
 
             <div className={classes.appStoreImageDiv}>
               <div>
@@ -1692,7 +1702,7 @@ const IndexPageTemplate = ({
                   target="_blank"
                   rel="noreferrer"
                 >
-                  <Image src="/img/playstore.png" height={50} width="auto" alt="Google Play" className={classes.appStoreImage} />
+                  <img src="/img/playstore.png" alt="Google Play" className={classes.appStoreImage} />
                 </a>
               </div>
               <div>
@@ -1701,7 +1711,7 @@ const IndexPageTemplate = ({
                   href={getAppLink('apple')}
                   target="_blank"
                 >
-                  <Image src="/img/app_store.png" height={50} width="auto" alt="Apple Store" className={classes.appStoreImage} />
+                  <img src="/img/app_store.png" alt="Apple Store" className={classes.appStoreImage} />
                 </a>
 
               </div>
@@ -2045,7 +2055,7 @@ const IndexPageTemplate = ({
         </div>
         )}
         {/* {showFAQ && showAppDownloads && (
-        <Hidden item mdUp>
+        <Hidden mdUp>
           <Grid container style={{ textAlign: 'center', marginTop: '30px' }}>
             <Grid item xs={12}>
               <a
@@ -2062,7 +2072,7 @@ const IndexPageTemplate = ({
         </Hidden>
         )} */}
         {showFAQ && showAppDownloads && (
-        <Hidden item smDown>
+        <Hidden smDown>
 
           <div className={classes.appStoreImageDiv}>
             <div>
@@ -2071,7 +2081,7 @@ const IndexPageTemplate = ({
                 target="_blank"
                 rel="noreferrer"
               >
-                <Image src="/img/playstore.png" height={50} width="auto" alt="Google Play" className={classes.appStoreImage} />
+                <img src="/img/playstore.png" alt="Google Play" className={classes.appStoreImage} />
               </a>
             </div>
             <div>
@@ -2080,7 +2090,7 @@ const IndexPageTemplate = ({
                 href={getAppLink('apple')}
                 target="_blank"
               >
-                <Image src="/img/app_store.png" height={50} width="auto" alt="Apple Store" className={classes.appStoreImage} />
+                <img src="/img/app_store.png" alt="Apple Store" className={classes.appStoreImage} />
               </a>
 
             </div>
@@ -2094,7 +2104,6 @@ const IndexPageTemplate = ({
 };
 
 IndexPageTemplate.propTypes = {
-  location: PropTypes.instanceOf(Object).isRequired,
   showAppDownloads: PropTypes.bool,
   showChart: PropTypes.bool,
   showFAQ: PropTypes.bool,

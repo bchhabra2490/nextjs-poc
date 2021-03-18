@@ -24,7 +24,7 @@ const getToken = () => {
   return webToken;
 };
 
-const uri = `${process.env.NEXT_API_URL}/graphql`;
+const uri = `${process.env.NEXT_PUBLIC_API_URL}/graphql`;
 
 const apolloFetch = createApolloFetch({ uri });
 

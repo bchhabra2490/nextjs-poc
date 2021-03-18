@@ -67,31 +67,6 @@ const GameStop = ({ location }) => {
       console.log(er);
     }
   }, []);
-  const data = useStaticQuery(graphql`
-    query {
-      logoImage: file(relativePath: { eq: "logo.png" }) {
-        childImageSharp {
-          fluid(maxWidth: 400) {
-            ...GatsbyImageSharpFluid_noBase64
-          }
-        }
-      },
-      playstore:file(relativePath: { eq: "/img/playstore.png" }) {
-        childImageSharp {
-          fluid(maxWidth: 400) {
-            ...GatsbyImageSharpFluid_noBase64
-          }
-        }
-      },
-      appstore:file(relativePath: { eq: "/img/app_store.png" }) {
-        childImageSharp {
-          fluid(maxWidth: 400) {
-            ...GatsbyImageSharpFluid_noBase64
-          }
-        }
-      },
-    }
-  `);
   return (
     <>
       <SEO title="Teji Mandi - Stock Investing, Simplified" image="https://firebasestorage.googleapis.com/v0/b/tejimandiprod.appspot.com/o/images%2F08a63748-de6b-f880-2c79-ab3c9aea7d29.png?alt=media&token=a9ef2852-c589-432c-87f0-60171b38fa1a" />
@@ -99,11 +74,9 @@ const GameStop = ({ location }) => {
         <div>
           <Grid container>
             <Grid item xs={12} className={classes.appLogo}>
-              <Image
+              <img
                 src="/img/logo.png"
                 alt="Teji Mandi"
-                width={400}
-height="auto"
                 className={classes.appLogoImage}
               />
               <p className={classes.appText}>Stock Investing, Simplified</p>
@@ -144,7 +117,7 @@ height="auto"
                 </Typography>
               </Grid>
             </Grid>
-            <Hidden item mdUp>
+            <Hidden mdUp>
               <Grid container>
                 <Grid item xs={12} style={{ textAlign: 'center', margin: '30px 0px 100px 0px' }}>
                   <a
@@ -160,7 +133,7 @@ height="auto"
               </Grid>
             </Hidden>
 
-            <Hidden item smDown>
+            <Hidden smDown>
 
               <div className={classes.appStoreImageDiv}>
                 <div>
@@ -169,7 +142,7 @@ height="auto"
                     target="_blank"
                     rel="noreferrer"
                   >
-                    <Image
+                    <img
                 src="/img/playstore.png" alt="Google Play" className={classes.appStoreImage} />
                   </a>
                 </div>
@@ -179,7 +152,7 @@ height="auto"
                     href="https://apps.apple.com/in/app/teji-mandi-portfolio-advisor/id1531900507"
                     target="_blank"
                   >
-                    <Image
+                    <img
                 src="/img/app_store.png" alt="Apple Store" className={classes.appStoreImage} />
                   </a>
 

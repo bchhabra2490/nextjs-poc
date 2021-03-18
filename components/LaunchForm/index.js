@@ -16,7 +16,7 @@ import PropTypes from 'prop-types';
 import defaultTheme from '../../theme-material-ui/theme';
 import useScript from '../hooks/useScript';
 
-const uri = `${process.env.NEXT_API_URL}/graphql`;
+const uri = `${process.env.NEXT_PUBLIC_API_URL}/graphql`;
 const apolloFetch = createApolloFetch({ uri });
 const mutations = `
   mutation addLead ($data: String!) {
@@ -90,6 +90,7 @@ const FORM_STATUS = {
 };
 
 const LaunchForm = ({ showRequirements, title }) => {
+  console.log("Next API Url",process.env);
   const classes = useStyles();
   const router = useRouter();
 

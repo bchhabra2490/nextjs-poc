@@ -18,7 +18,7 @@ import defaultTheme from '../theme-material-ui/theme';
 import BottomBear from '../assets/svgs/bottom-bear';
 import LeftBull from '../assets/svgs/leftBull';
 
-const uri = `${process.env.NEXT_API_URL}/graphql`;
+const uri = `${process.env.NEXT_PUBLIC_API_URL}/graphql`;
 const apolloFetch = createApolloFetch({ uri });
 const mutations = `
   mutation addLead ($data: String!) {
@@ -300,11 +300,9 @@ const SmallcaseInvestmentPage = ({ location }) => {
         <Container maxWidth={false} className={classes.container}>
           <Grid container>
             <Grid item xs={12} className={classes.appLogo}>
-              <Image
+              <img
                 src="/img/logo.png"
                 alt="Teji Mandi"
-                width={400}
-height="auto"
                 className={classes.appLogoImage}
               />
             </Grid>
@@ -502,7 +500,7 @@ height="auto"
               </Grid>
               <Grid container>
                 <Grid item xs={12}>
-                  <Image src="/img/graph.png" alt="" className={classes.graphImage} layout='fill' />
+                  <img src="/img/graph.png" alt="" className={classes.graphImage} />
                 </Grid>
               </Grid>
 

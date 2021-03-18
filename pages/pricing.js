@@ -98,13 +98,13 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const StaticContent = () => {
-  if(window != 'undefined' && window.fcWidget != 'undefined'){
+  
     try {
       window.fcWidget.hide();
     } catch (er) {
       console.log(er);
     }
-  }
+  
 
   const classes = useStyles();
 
@@ -167,7 +167,7 @@ const StaticContent = () => {
                 className={classes.pricingText}
                 style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}
               >
-                <Image src="/img/Favicon 96x96.png" alt="" className={classes.logo} layout='fill' />
+                <img src="/img/Favicon 96x96.png" alt="" className={classes.logo}/>
                 Teji Mandi Subscription
               </Typography>
             </Grid>
@@ -197,7 +197,7 @@ const StaticContent = () => {
             </Grid>
           </Grid>
 
-          <Hidden item mdUp>
+          <Hidden mdUp>
             <Grid container style={{ textAlign: 'center', marginTop: '30px' }}>
               <Grid item xs={12}>
                 <a
@@ -213,7 +213,7 @@ const StaticContent = () => {
             </Grid>
           </Hidden>
 
-          <Hidden item smDown>
+          <Hidden smDown>
 
             <div className={classes.appStoreImageDiv}>
               <div>
@@ -222,7 +222,7 @@ const StaticContent = () => {
                   target="_blank"
                   rel="noreferrer"
                 >
-                  <Image src="/img/playstore.png" alt="Google Play" height={50} width="auto" className={classes.appStoreImage} />
+                  <img src="/img/playstore.png" alt="Google Play" className={classes.appStoreImage} />
                 </a>
               </div>
               <div>
@@ -231,7 +231,7 @@ const StaticContent = () => {
                   href={getAppLink('apple')}
                   target="_blank"
                 >
-                  <Image src="/img/app_store.png" alt="Apple Store" height={50} width="auto" className={classes.appStoreImage} />
+                  <img src="/img/app_store.png" alt="Apple Store" className={classes.appStoreImage} />
                 </a>
 
               </div>

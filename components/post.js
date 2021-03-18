@@ -13,7 +13,7 @@ import BlogHeader from './NewHeader/BlogHeader';
 import { HTMLContent } from './content';
 import defaultImage from '../img/logo.png';
 
-const uri = `${process.env.NEXT_API_URL}/graphql`;
+const uri = `${process.env.NEXT_PUBLIC_API_URL}/graphql`;
 console.log('API URL: ', uri);
 const apolloFetch = createApolloFetch({ uri });
 

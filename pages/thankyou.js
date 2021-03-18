@@ -72,11 +72,9 @@ const ThankYouPage = ({ location }) => {
         <Container maxWidth={false} className={classes.container}>
           <Grid container>
             <Grid item xs={12} className={classes.appLogo}>
-              <Image
+              <img
                 src="/img/logo.png"
                 alt="Teji Mandi"
-                width={400}
-height="auto"
                 className={classes.appLogoImage}
               />
             </Grid>

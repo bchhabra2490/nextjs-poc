@@ -1,4 +1,3 @@
-import '../styles/globals.css'
 import '../components/all.sass';
 
 function MyApp({ Component, pageProps }) {

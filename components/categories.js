@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Link from 'next/link';
 import kebabCase from 'lodash/kebabCase';
 import map from 'lodash/map';
 import orderBy from 'lodash/orderBy';
@@ -147,13 +146,13 @@ const Categories = ({ loading, data }) => (
               <React.Fragment key={category.name}>
                 <div className="category">
                   <h1 className="title">{category.name}</h1>
-                  <Link
+                  <a
                     href={`/category?${kebabCase(category.name)}-${
                       category.communityID
                     }`}
                   >
                     See all
-                  </Link>
+                  </a>
                 </div>
                 <Posts data={category.data} hideShowMore />
               </React.Fragment>

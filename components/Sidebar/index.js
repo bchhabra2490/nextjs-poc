@@ -1,7 +1,6 @@
 import className from 'classnames';
 import React from 'react';
 import PropTypes from 'prop-types';
-import Link from 'next/link';
 import MenuIcon from '../../assets/svgs/Hamburger';
 import TwitterIcon from '../../assets/svgs/Twitter';
 import Instagram from '../../assets/svgs/Instagram';
@@ -46,7 +45,7 @@ const Sidebar = ({ open, handleSidebar }) => {
           <div className="sidebar-body">
             <ul>
               <li>
-                <Link
+                <a
                   href="/#how-it-works"
                   activeClassName="is-active"
                   onClick={(event) => {
@@ -55,10 +54,10 @@ const Sidebar = ({ open, handleSidebar }) => {
                   }}
                 >
                   How It Works
-                </Link>
+                </a>
               </li>
               <li>
-                <Link
+                <a
                   href="/#performance"
                   activeClassName="is-active"
                   onClick={(event) => {
@@ -67,24 +66,24 @@ const Sidebar = ({ open, handleSidebar }) => {
                   }}
                 >
                   Track Record
-                </Link>
+                </a>
               </li>
               <li>
-                <Link href="/research" activeClassName="is-active">
+                <a href="/research" activeClassName="is-active">
                   Research
-                </Link>
+                </a>
               </li>
               <li>
-                <Link
+                <a
                   href="https://www.linkedin.com/company/tejimandiapp/jobs/"
                   target="_blank"
                   activeClassName="is-active"
                 >
                   Careers
-                </Link>
+                </a>
               </li>
               <li>
-                <Link
+                <a
                   href="/#faq"
                   onClick={(event) => {
                     handleSidebar(false);
@@ -92,21 +91,21 @@ const Sidebar = ({ open, handleSidebar }) => {
                   }}
                 >
                   FAQs
-                </Link>
+                </a>
               </li>
               <li>
-                <Link
+                <a
                   href="/legal/privacy"
                 >
                   Privacy Policy
-                </Link>
+                </a>
               </li>
               <li>
-                <Link
+                <a
                   href="/legal/terms"
                 >
                   Terms and Conditions
-                </Link>
+                </a>
               </li>
               <p style={{ fontWeight: 'bold' }}>Follow Us:</p>
               <div style={{ justifyContent: 'space-evenly', display: 'flex' }}>
