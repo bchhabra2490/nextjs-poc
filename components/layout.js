@@ -1,6 +1,7 @@
 import className from 'classnames';
 import React from 'react';
 import PropTypes from 'prop-types';
+import FreshChat from 'react-freshchat'
 import Header from './NewHeader/Header';
 import Footer from './Footer/Footer';
 import Sidebar from './Sidebar';
@@ -30,6 +31,20 @@ const Layout = ({
   };
   return (
     <>
+   {typeof window != 'undefined' && <FreshChat
+        token={process.env.NEXT_PUBLIC_FRESHCHAT_TOKEN}
+       
+        onInit={widget => {
+          /* Use `widget` instead of `window.fcWidget`
+            widget.user.setProperties({
+              email: user.email,
+              first_name: user.firstName,
+              last_name: user.lastName,
+              phone: user.phoneNumber,
+            })
+          */
+        }}
+      />}
       {!hideHeader && (
         <Header
           siteTitle={"Teji Mandi"}
