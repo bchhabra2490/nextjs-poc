@@ -1,16 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { createApolloFetch } from 'apollo-fetch';
-import PropTypes from 'prop-types';
 import { useRouter } from 'next/router'
 import Skeleton from '@material-ui/lab/Skeleton';
 import moment from 'moment';
+import { DiscussionEmbed } from 'disqus-react';
 import ReactMarkdown from 'react-markdown';
-import {DiscussionEmbed} from "disqus-react"
-import { useRouter } from 'next/router'
-import Layout from './layout';
-import SEO from './seo';
-import BlogHeader from './NewHeader/BlogHeader';
-import { HTMLContent } from './content';
+import Layout from '../../../components/layout';
+import SEO from '../../../components/seo';
+import BlogHeader from '../../../components/NewHeader/BlogHeader';
+import { HTMLContent } from '../../../components/content';
 
 const uri = `${process.env.NEXT_PUBLIC_API_URL}/graphql`;
 console.log('API URL: ', uri);
@@ -147,7 +145,12 @@ const BlogPostTemplate = ({
   title,
 }) => {
   let disqusConfig = {};
-  const router = useRouter()
+  let location = {
+    href: ''
+  };
+  if (window) {
+   location = window.location;
+  }  
   React.useEffect(() => {
     disqusConfig = {
       url: `${location.origin}/${location.pathname}}`,
@@ -155,6 +158,8 @@ const BlogPostTemplate = ({
       title,
     };
   }, [id]);
+  
+
 
   const publishedDate = postDate || Number(date);
   return (
@@ -194,25 +199,28 @@ const BlogPostTemplate = ({
           <ul>
             {tags.map((tag) => (
               <li key={`${tag}tag`}>
-                <Link href={`/topics/${kebabCase(tag)}/`}>{tag}</Link>
+                <Link to={`/topics/${kebabCase(tag)}/`}>{tag}</Link>
               </li>
             ))}
           </ul>
         </footer> */}
       </article>
       <div className="disqus-container">
-      <DiscussionEmbed
-        config={disqusConfig}
-      />
+        <DiscussionEmbed config={disqusConfig} />
       </div>
     </div>
   );
 };
 
-const Post = ({ messageID, communityID, location }) => {
-  console.log(messageID, communityID);
+const Post = ({params }) => {
+  console.log(params);
   const router = useRouter();
-
+  let location = {
+    href: ''
+  };
+  if (typeof window != 'undefined') {
+   location = window.location;
+  }  
   const [message, setMessage] = useState({});
   const [loading, setLoading] = useState(true);
   useEffect(() => {
@@ -230,8 +238,8 @@ const Post = ({ messageID, communityID, location }) => {
       query,
       variables: {
         getMessageData: {
-          ID: messageID,
-          communityID,
+          ID: params.mid,
+          communityID: params.cid,
         },
       },
     })
@@ -246,7 +254,7 @@ const Post = ({ messageID, communityID, location }) => {
       .catch(() => {
         setLoading(false);
       });
-  }, [messageID, communityID]);
+  }, [params.mid, params.cid]);
 
   const content = (message.content && JSON.parse(message.content)) || {};
   const meta = [
@@ -277,7 +285,7 @@ const Post = ({ messageID, communityID, location }) => {
   ];
 
   return (
-    <Layout location={location} showLinks={false}>
+    <Layout showLinks={false}>
 
       {loading && <PostLoader />}
       {!loading && (
@@ -304,15 +312,18 @@ const Post = ({ messageID, communityID, location }) => {
           />
         </>
       )}
-      <BlogHeader location={location} title={content.title} />
+      <BlogHeader title={content.title} />
     </Layout>
   );
 };
 
-Post.propTypes = {
-  messageID: PropTypes.instanceOf(String).isRequired,
-  communityID: PropTypes.instanceOf(String).isRequired,
-  location: PropTypes.instanceOf(Object).isRequired,
-};
+export async function getServerSideProps({query}) {
+  return {
+    props: {
+      params: query,
+    }, // will be passed to the page component as props
+  }
+}
+
 
 export default Post;

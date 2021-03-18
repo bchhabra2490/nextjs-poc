@@ -7,7 +7,6 @@ import isEmpty from 'lodash/isEmpty';
 import Skeleton from '@material-ui/lab/Skeleton';
 import size from 'lodash/size';
 import PreviewCompatibleImage from './PreviewCompatibleImage';
-import defaultImage from '../img/logo.png';
 
 const calculateTime = (string) => {
   if (size(string) < 1) return '';
@@ -176,7 +175,7 @@ const Post = ({ post }) => {
               )}
               {!content.image && (
                 <div className="default-post-image-container">
-                  <img src={defaultImage} alt="post-default" />
+                  <img src="/img/logo.png" alt="post-default" />
                 </div>
               )}
             </a>

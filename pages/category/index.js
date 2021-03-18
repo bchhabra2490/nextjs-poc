@@ -35,7 +35,7 @@ const query = `
   }
 `;
 
-const Category = ({ location }) => {
+const Category = () => {
   const [data, setData] = useState([]);
   const [categoryName, setCategoryName] = useState();
   const [communityID, setCommunityID] = useState(0);
@@ -96,7 +96,7 @@ const Category = ({ location }) => {
       });
   };
   return (
-    <Layout location={location} showLinks={false}>
+    <Layout showLinks={false}>
       <SEO title="Home" />
       <section className="section categories">
         <div className="container content">
@@ -123,6 +123,7 @@ const Category = ({ location }) => {
     </Layout>
   );
 };
+
 
 Category.propTypes = {};
 
